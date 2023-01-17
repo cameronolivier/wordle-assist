@@ -37,9 +37,15 @@ const App = () => {
         word
           .split('')
           .slice(0, 5)
-          .forEach((char) => {
-            const curr = _letters.hasOwnProperty(char) ? _letters[char] : 0
-            _letters[char] = curr + 1
+          .forEach((char, index) => {
+            if (index > word.indexOf(char)) {
+              const key = `${char}${char}`
+              const curr = _letters.hasOwnProperty(key) ? _letters[key] : 0
+              _letters[key] = curr + 1
+            } else {
+              const curr = _letters.hasOwnProperty(char) ? _letters[char] : 0
+              _letters[char] = curr + 1
+            }
           })
       })
       setLetters(_letters)
