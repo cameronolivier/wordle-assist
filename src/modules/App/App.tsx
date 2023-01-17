@@ -2,22 +2,39 @@ import './App.css'
 import { useState, FocusEvent, useEffect } from 'react'
 
 type Letters = Record<string, number>
+type WordCount = {
+  count: number
+  raw: Letters[]
+}
+type WordCounts = Record<string, WordCount>
 
 const App = () => {
   const [words, setWords] = useState<string[]>()
   const [letters, setLetters] = useState<Letters>({})
-  const [wordCounts, setWordCounts] = useState<Letters>({})
+  const [wordCounts, setWordCounts] = useState<WordCounts>({})
 
   useEffect(() => {
     if (Object.keys(letters).length > 0 && words && words.length > 0) {
-      const _wordCounts: Letters = {}
+      const _wordCounts: WordCounts = {}
       words.forEach((word) => {
-        _wordCounts[word.slice(0, 5)] = word
-          .split('')
-          .slice(0, 5)
-          .reduce((acc, curr): number => {
-            return letters[curr] + acc
-          }, 0)
+        _wordCounts[word.slice(0, 5)] = {
+          count: word
+            .split('')
+            .slice(0, 5)
+            .map((letter, index) => {
+              if (index > word.indexOf(letter)) {
+                return `${letter}${letter}`
+              }
+              return letter
+            })
+            .reduce((acc, curr): number => {
+              return letters[curr] + acc
+            }, 0),
+          raw: word
+            .split('')
+            .slice(0, 5)
+            .map((char) => ({ [char]: letters[char] } as Letters)),
+        }
       })
       setWordCounts(_wordCounts)
     }
@@ -60,9 +77,15 @@ const App = () => {
           <textarea
             rows={20}
             onBlur={handleWords}
-            className="h-56 text-xl ls-1 text-"
+            className="h-56 text-l ls-1 p-4"
           />
-          <p className="italic text-stone-400">Values calculated on blur</p>
+          <p className="italic text-stone-400 border-b border-slate-600 mx-10 mt-2 pb-2">
+            Values calculated on blur.
+          </p>
+          <p className="italic text-stone-400 mx-10 my-2">
+            For strings longer than 5 characters, only the first 5 characters
+            will be tallied
+          </p>
         </div>
         <div className="flex-1">
           <h2 className="text-3xl text-left">Letter Counts:</h2>
@@ -79,11 +102,15 @@ const App = () => {
           <h2 className="text-3xl text-left">Results:</h2>
           <div>
             {Object.keys(wordCounts).length > 0 &&
-              Object.entries(wordCounts).map((entry) => (
-                <p className="text-left">
-                  {entry[0]}: {entry[1]}
-                </p>
-              ))}
+              Object.entries(wordCounts)
+                .sort((a, b) => b[1].count - a[1].count)
+                .map((entry) => (
+                  <p>
+                    <pre>
+                      {entry[0]}: {entry[1].count}
+                    </pre>
+                  </p>
+                ))}
           </div>
         </div>
       </div>
