@@ -1,44 +1,27 @@
 import { FocusEvent, useEffect, useState } from 'react'
 import { Maybe } from '../../types'
+import { filterWords } from './WordFilterRules.utils'
 
 type Props = {
   words: Maybe<string[]>
   onFilterUpdate: (words: Maybe<string[]>) => void
 }
+
 const WordFilterRules = ({ words, onFilterUpdate }: Props) => {
-  const [lettersPlaced, setLettersPlaced] = useState<string[]>([])
+  const [rules, setRules] = useState<string[]>([])
 
   useEffect(() => {
-    console.log(lettersPlaced && words)
-    if (lettersPlaced && words) {
-      // const wordsFiltered = words.filter((word) => {
-      //   return lettersPlaced.reduce((acc, letter) => {
-      //     if (letter[2] === '-') {
-      //       return acc && word[parseInt(letter[1])] !== letter[0]
-      //     }
-      //
-      //     return acc && word[parseInt(letter[1])] === letter[0]
-      //   }, false)
-      // })
-
-      const wordsFiltered = words.filter((word) => {
-        return lettersPlaced.reduce((acc, letter) => {
-          return acc || word[parseInt(letter[1])] === letter[0]
-        }, true)
-        const letter = lettersPlaced[0]
-        return word[parseInt(letter[1])] === letter[0]
-      })
-      console.log({ wordsFiltered })
-
+    if (rules && words) {
+      const wordsFiltered = filterWords(rules, words)
       onFilterUpdate(wordsFiltered)
     }
-  }, [lettersPlaced, words])
+  }, [rules, words])
 
   const handleWords = (
     e: FocusEvent<HTMLTextAreaElement, HTMLTextAreaElement>,
   ) => {
-    const letterPlacements = e.target.value.split('\n')
-    setLettersPlaced(letterPlacements)
+    const letterRules = e.target.value.split('\n')
+    setRules(letterRules)
   }
 
   return (
@@ -53,7 +36,7 @@ const WordFilterRules = ({ words, onFilterUpdate }: Props) => {
         className="h-56 text-l ls-1 p-4"
       />
       <p className="text-gray-400">
-        EG: if the letter A in the first spot is yellow, then enter: A0-
+        EG: if the letter A in the first spot is yellow, then enter: A1-
       </p>
     </div>
   )

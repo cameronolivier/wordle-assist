@@ -8,6 +8,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "jest",
+    "test:watch": "jest --watch",
     "code:fix": "npx prettier --write ."
   },
   "dependencies": {

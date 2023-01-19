@@ -1,5 +1,5 @@
 import './App.css'
-import { FocusEvent, useEffect, useState } from 'react'
+import { useState } from 'react'
 import { LetterCount, Letters } from '../../components/LetterCount'
 import RankedWords from '../../components/RankedWords'
 import WordEntryField from '../../components/WordEntryField'
