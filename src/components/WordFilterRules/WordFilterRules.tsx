@@ -1,27 +1,17 @@
-import { FocusEvent, useEffect, useState } from 'react'
+import { FocusEvent } from 'react'
 import { Maybe } from '../../types'
-import { filterWords } from './WordFilterRules.utils'
 
 type Props = {
-  words: Maybe<string[]>
-  onFilterUpdate: (words: Maybe<string[]>) => void
+  onSetRules: (rules: Maybe<string[]>) => void
 }
 
-const WordFilterRules = ({ words, onFilterUpdate }: Props) => {
-  const [rules, setRules] = useState<string[]>([])
-
-  useEffect(() => {
-    if (rules && words) {
-      const wordsFiltered = filterWords(rules, words)
-      onFilterUpdate(wordsFiltered)
-    }
-  }, [rules, words])
+const WordFilterRules = ({ onSetRules }: Props) => {
 
   const handleWords = (
     e: FocusEvent<HTMLTextAreaElement, HTMLTextAreaElement>,
   ) => {
     const letterRules = e.target.value.split('\n')
-    setRules(letterRules)
+    onSetRules(letterRules)
   }
 
   return (

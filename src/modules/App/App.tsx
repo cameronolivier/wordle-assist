@@ -1,22 +1,30 @@
 import './App.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { LetterCount, Letters } from '../../components/LetterCount'
 import RankedWords from '../../components/RankedWords'
 import WordEntryField from '../../components/WordEntryField'
 import WordFilterRules from '../../components/WordFilterRules'
+import { filterWords } from '../../components/WordFilterRules/WordFilterRules.utils'
 import { Maybe } from '../../types'
 const App = () => {
+  const [rules, setRules] = useState<Maybe<string[]>>()
   const [words, setWords] = useState<Maybe<string[]>>()
   const [filteredWords, setFilteredWords] = useState<Maybe<string[]>>()
-
   const [letters, setLetters] = useState<Letters>({})
+
+  useEffect(() => {
+    if (rules && words) {
+      const wordsFiltered = filterWords(rules, words)
+      setFilteredWords(wordsFiltered)
+    }
+  }, [rules, words])
 
   return (
     <div className="App">
       <h1 className="mb-10">Wordle Assist</h1>
       <div className="flex">
+        <WordFilterRules onSetRules={setRules} />
         <WordEntryField onWordsUpdate={setWords} />
-        <WordFilterRules words={words} onFilterUpdate={setFilteredWords} />
         <LetterCount words={filteredWords} onLettersUpdate={setLetters} />
         <RankedWords letters={letters} words={filteredWords} />
       </div>
