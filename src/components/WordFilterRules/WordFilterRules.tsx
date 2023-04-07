@@ -18,7 +18,7 @@ const WordFilterRules = ({ words, onFilterUpdate }: Props) => {
     }
   }, [rules, words])
 
-  const handleWords = () => {
+  const handleRules = () => {
     if (wordFilterRef.current) {
       const letterRules = wordFilterRef.current?.value.split('\n')
       setRules(letterRules)
@@ -38,9 +38,9 @@ const WordFilterRules = ({ words, onFilterUpdate }: Props) => {
       />
       <button
         className="block justify-center content-center"
-        onClick={handleWords}
+        onClick={handleRules}
       >
-        Next
+        Calculate
       </button>
       <p className="italic text-stone-400 mx-10 my-2">
         EG: if the letter A in the first spot is yellow, then enter: A1-

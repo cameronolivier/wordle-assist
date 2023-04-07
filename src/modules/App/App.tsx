@@ -14,7 +14,7 @@ const App = () => {
   return (
     <div className="App">
       <h1 className="mb-10">Wordle Assist</h1>
-      <div className="flex">
+      <div className="flex flex-col md:flex-row">
         <div className="flex flex-col mr-10">
           <WordEntryField onWordsUpdate={setWords} />
           <WordFilterRules words={words} onFilterUpdate={setFilteredWords} />
