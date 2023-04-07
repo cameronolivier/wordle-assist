@@ -1,4 +1,4 @@
-import { FocusEvent, useEffect, useState } from 'react'
+import { FocusEvent, useEffect, useRef, useState } from 'react'
 import { Maybe } from '../../types'
 import { filterWords } from './WordFilterRules.utils'
 
@@ -8,6 +8,7 @@ type Props = {
 }
 
 const WordFilterRules = ({ words, onFilterUpdate }: Props) => {
+  const wordFilterRef = useRef<HTMLTextAreaElement>(null)
   const [rules, setRules] = useState<string[]>([])
 
   useEffect(() => {
@@ -17,25 +18,31 @@ const WordFilterRules = ({ words, onFilterUpdate }: Props) => {
     }
   }, [rules, words])
 
-  const handleWords = (
-    e: FocusEvent<HTMLTextAreaElement, HTMLTextAreaElement>,
-  ) => {
-    const letterRules = e.target.value.split('\n')
-    setRules(letterRules)
+  const handleWords = () => {
+    if (wordFilterRef.current) {
+      const letterRules = wordFilterRef.current?.value.split('\n')
+      setRules(letterRules)
+    }
   }
 
   return (
-    <div className="flex-1">
+    <div className="flex flex-col flex-1">
       <p className="text-gray-300">
         Enter each letter, the index, and whether it's <strong>+</strong> for
         placed (green) or <strong>-</strong> for excluded (yellow)
       </p>
       <textarea
+        ref={wordFilterRef}
         rows={20}
-        onBlur={handleWords}
-        className="h-56 text-l ls-1 p-4"
+        className="h-56 text-l ls-1 p-4 mb-2"
       />
-      <p className="text-gray-400">
+      <button
+        className="block justify-center content-center"
+        onClick={handleWords}
+      >
+        Next
+      </button>
+      <p className="italic text-stone-400 mx-10 my-2">
         EG: if the letter A in the first spot is yellow, then enter: A1-
       </p>
     </div>

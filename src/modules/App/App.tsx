@@ -15,10 +15,14 @@ const App = () => {
     <div className="App">
       <h1 className="mb-10">Wordle Assist</h1>
       <div className="flex">
-        <WordEntryField onWordsUpdate={setWords} />
-        <WordFilterRules words={words} onFilterUpdate={setFilteredWords} />
-        <LetterCount words={filteredWords} onLettersUpdate={setLetters} />
-        <RankedWords letters={letters} words={filteredWords} />
+        <div className="flex flex-col mr-10">
+          <WordEntryField onWordsUpdate={setWords} />
+          <WordFilterRules words={words} onFilterUpdate={setFilteredWords} />
+        </div>
+        <div className="flex flex-col">
+          <LetterCount words={filteredWords} onLettersUpdate={setLetters} />
+          <RankedWords letters={letters} words={filteredWords} />
+        </div>
       </div>
     </div>
   )
