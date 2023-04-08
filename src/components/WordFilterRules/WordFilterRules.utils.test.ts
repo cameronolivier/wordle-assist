@@ -1,15 +1,14 @@
-import { filterWords } from './WordFilterRules.utils';
 import * as SUT from './WordFilterRules.utils';
 
 describe('WordFilterRules.utils', () => {
   describe('rulesFilter', () => {
-    it.each([
-      ['abysm', false],
-      ['chasm', true],
-      ['flask', true],
-      ['caffs', false],
-      ['chaws', false],
-    ])('should filter %s by the provided rules', (word, expected) => {
+    test.each([
+      { word: 'abysm', expected: false },
+      { word: 'chasm', expected: true },
+      { word: 'flask', expected: true },
+      { word: 'caffs', expected: false },
+      { word: 'chaws', expected: false },
+    ])('should filter %s by the provided rules', ({ word, expected }) => {
       // given ...
       const rules = ['a1-', 's4+'];
 

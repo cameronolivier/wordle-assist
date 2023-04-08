@@ -1,6 +1,6 @@
-import { FocusEvent, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-import { type Maybe } from '../../types';
+import { type Maybe } from '~/types';
 
 interface Props {
   onWordsUpdate: (words: Maybe<string[]>) => void;
@@ -27,7 +27,6 @@ const WordEntryField = ({ onWordsUpdate }: Props) => {
       <button className="block justify-center content-center" onClick={handleWords}>
         Next
       </button>
-
       <p className="italic text-stone-400 mx-10 my-2">For strings longer than 5 characters, only the first 5 characters will be tallied</p>
     </div>
   );

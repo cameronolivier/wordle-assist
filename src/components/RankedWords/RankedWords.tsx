@@ -46,7 +46,7 @@ const RankedWords = ({ letters, words }: Props) => {
           Object.entries(wordCounts)
             .sort((a, b) => b[1].count - a[1].count)
             .map((entry) => (
-              <p>
+              <p key={entry[0]}>
                 <pre>
                   {entry[0]}: {entry[1].count}
                 </pre>

@@ -1,6 +1,6 @@
-import { FocusEvent, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-import { type Maybe } from '../../types';
+import { type Maybe } from '~/types';
 
 import { filterWords } from './WordFilterRules.utils';
 
@@ -18,7 +18,7 @@ const WordFilterRules = ({ words, onFilterUpdate }: Props) => {
       const wordsFiltered = filterWords(rules, words);
       onFilterUpdate(wordsFiltered);
     }
-  }, [rules, words]);
+  }, [onFilterUpdate, rules, words]);
 
   const handleRules = () => {
     if (wordFilterRef.current != null) {
@@ -35,7 +35,8 @@ const WordFilterRules = ({ words, onFilterUpdate }: Props) => {
   return (
     <div className="flex flex-col flex-1">
       <p className="text-gray-300">
-        Enter each letter, the index, and whether it's <strong>+</strong> for placed (green) or <strong>-</strong> for excluded (yellow)
+        Enter each letter, the index, and whether it&apos;s <strong>+</strong> for placed (green) or <strong>-</strong> for excluded
+        (yellow)
       </p>
       <textarea ref={wordFilterRef} rows={20} className="h-56 text-l ls-1 p-4 mb-2" />
       <div className="flex">

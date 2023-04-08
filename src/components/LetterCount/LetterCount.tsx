@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { type Maybe } from '../../types';
+import { type Maybe } from '~/types';
 
 export type Letters = Record<string, number>;
 
@@ -25,10 +25,10 @@ export const LetterCount = ({ words, onLettersUpdate }: Props) => {
           .forEach((char, index) => {
             if (index > word.indexOf(char)) {
               const key = `${char}${char}`;
-              const curr = _letters.hasOwnProperty(key) ? _letters[key] : 0;
+              const curr = Object.prototype.hasOwnProperty.call(_letters, key) ? _letters[key] : 0;
               _letters[key] = curr + 1;
             } else {
-              const curr = _letters.hasOwnProperty(char) ? _letters[char] : 0;
+              const curr = Object.prototype.hasOwnProperty.call(_letters, char) ? _letters[char] : 0;
               _letters[char] = curr + 1;
             }
           });
@@ -42,7 +42,7 @@ export const LetterCount = ({ words, onLettersUpdate }: Props) => {
       <div>
         {Object.keys(letters).length > 0 &&
           Object.entries(letters).map((entry) => (
-            <p className="text-left">
+            <p key={entry[0]} className="text-left">
               {entry[0]}: {entry[1]}
             </p>
           ))}

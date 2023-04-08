@@ -1,16 +1,20 @@
-import { render } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
+
+import { render } from '../../../test/utils';
 
 import App from './App';
 
 // Tests
-test('Renders main page correctly', () => {
-  // Setup
-  render(<App />);
+describe('App', () => {
+  it('Renders main page correctly', () => {
+    // Setup
+    render(<App />);
 
-  // Pre Expecations
+    // Pre Expecations
 
-  // Init
+    // Init
 
-  // Post Expectations
-  expect(true).toBeTruthy();
+    // Post Expectations
+    expect(true).toBeTruthy();
+  });
 });
