@@ -25,10 +25,14 @@ export const LetterCount = ({ words, onLettersUpdate }: Props) => {
           .forEach((char, index) => {
             if (index > word.indexOf(char)) {
               const key = `${char}${char}`;
-              const curr = Object.prototype.hasOwnProperty.call(_letters, key) ? _letters[key] : 0;
+              const curr = Object.prototype.hasOwnProperty.call(_letters, key)
+                ? _letters[key]
+                : 0;
               _letters[key] = curr + 1;
             } else {
-              const curr = Object.prototype.hasOwnProperty.call(_letters, char) ? _letters[char] : 0;
+              const curr = Object.prototype.hasOwnProperty.call(_letters, char)
+                ? _letters[char]
+                : 0;
               _letters[char] = curr + 1;
             }
           });
@@ -38,7 +42,7 @@ export const LetterCount = ({ words, onLettersUpdate }: Props) => {
   }, [words]);
   return (
     <div className="flex-1">
-      <h2 className="text-3xl text-left">Letter Counts:</h2>
+      <h2 className="text-left text-3xl">Letter Counts:</h2>
       <div>
         {Object.keys(letters).length > 0 &&
           Object.entries(letters).map((entry) => (

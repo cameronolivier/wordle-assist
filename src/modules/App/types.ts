@@ -36,5 +36,18 @@ export interface Char {
   letter: Maybe<Letter>;
   state: LetterState;
 }
-export type Word = [Maybe<Char>, Maybe<Char>, Maybe<Char>, Maybe<Char>, Maybe<Char>];
-export type Card = [Maybe<Word>, Maybe<Word>, Maybe<Word>, Maybe<Word>, Maybe<Word>, Maybe<Word>];
+export type Word = [
+  Maybe<Char>,
+  Maybe<Char>,
+  Maybe<Char>,
+  Maybe<Char>,
+  Maybe<Char>
+];
+export type Card = [
+  Maybe<Word>,
+  Maybe<Word>,
+  Maybe<Word>,
+  Maybe<Word>,
+  Maybe<Word>,
+  Maybe<Word>
+];

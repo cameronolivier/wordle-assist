@@ -33,22 +33,34 @@ const WordFilterRules = ({ words, onFilterUpdate }: Props) => {
   };
 
   return (
-    <div className="flex flex-col flex-1">
+    <div className="flex flex-1 flex-col">
       <p className="text-gray-300">
-        Enter each letter, the index, and whether it&apos;s <strong>+</strong> for placed (green) or <strong>-</strong> for excluded
-        (yellow)
+        Enter each letter, the index, and whether it&apos;s <strong>+</strong>{' '}
+        for placed (green) or <strong>-</strong> for excluded (yellow)
       </p>
-      <textarea ref={wordFilterRef} rows={20} className="h-56 text-l ls-1 p-4 mb-2" />
+      <textarea
+        ref={wordFilterRef}
+        rows={20}
+        className="text-l ls-1 mb-2 h-56 p-4"
+      />
       <div className="flex">
-        <button className="block justify-center content-center flex-1" onClick={handleRules}>
+        <button
+          className="block flex-1 content-center justify-center"
+          onClick={handleRules}
+        >
           Calculate
         </button>
-        <button className="block justify-center content-center  flex-1" onClick={handleReset}>
+        <button
+          className="block flex-1 content-center  justify-center"
+          onClick={handleReset}
+        >
           Reset
         </button>
       </div>
 
-      <p className="italic text-stone-400 mx-10 my-2">EG: if the letter A in the first spot is yellow, then enter: A1-</p>
+      <p className="mx-10 my-2 italic text-stone-400">
+        EG: if the letter A in the first spot is yellow, then enter: A1-
+      </p>
     </div>
   );
 };

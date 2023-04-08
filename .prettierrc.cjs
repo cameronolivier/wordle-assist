@@ -1,9 +1,7 @@
+/** @type {import("prettier").Config} */
 module.exports = {
-  plugins: ['@ianvs/prettier-plugin-sort-imports'],
-  printWidth: 140,
+  plugins: [require.resolve('@ianvs/prettier-plugin-sort-imports'), require.resolve('prettier-plugin-tailwindcss')],
   singleQuote: true,
-  tabWidth: 2,
-  trailingComma: 'es5',
   importOrder: ['^~/(.*)$', '^../(.*)$', '^[./]'],
   importOrderBuiltinModulesToTop: true,
   importOrderCaseInsensitive: true,

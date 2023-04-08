@@ -20,11 +20,14 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:jsx-a11y/recommended',
     'plugin:react-hooks/recommended',
+    'plugin:tailwindcss/recommended',
     'plugin:react/jsx-runtime',
     'prettier',
   ],
-  plugins: [],
-  rules: {},
+  plugins: ['tailwindcss'],
+  rules: {
+    '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+  },
   settings: {
     react: {
       version: 'detect',

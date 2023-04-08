@@ -16,10 +16,10 @@ const App = () => {
   const [letters, setLetters] = useState<Letters>({});
 
   return (
-    <div className="App">
+    <div className="flex min-h-screen content-center justify-center bg-slate-900">
       <h1 className="mb-10">Wordle Assist</h1>
       <div className="flex flex-col md:flex-row">
-        <div className="flex flex-col mr-10">
+        <div className="mr-10 flex flex-col">
           <WordEntryField onWordsUpdate={setWords} />
           <WordFilterRules words={words} onFilterUpdate={setFilteredWords} />
         </div>

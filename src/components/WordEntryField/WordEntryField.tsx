@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
+import Text from '~/components/Text';
 import { type Maybe } from '~/types';
 
 interface Props {
@@ -20,14 +21,40 @@ const WordEntryField = ({ onWordsUpdate }: Props) => {
     }
   };
 
+  const handleReset = () => {
+    if (wordsRef.current != null) {
+      wordsRef.current.value = '';
+    }
+  };
+
   return (
-    <div className="flex flex-col flex-1 mb-20">
-      <p>Enter your list of 5 letter words:</p>
-      <textarea ref={wordsRef} rows={20} onBlur={handleWords} className="h-56 text-l ls-1 p-4 mb-2" />
-      <button className="block justify-center content-center" onClick={handleWords}>
-        Next
-      </button>
-      <p className="italic text-stone-400 mx-10 my-2">For strings longer than 5 characters, only the first 5 characters will be tallied</p>
+    <div className="mb-20 flex flex-1 flex-col">
+      <Text className="text-slate-300">Enter your list of 5 letter words:</Text>
+      <textarea
+        ref={wordsRef}
+        rows={20}
+        onBlur={handleWords}
+        className="text-l ls-1 mb-2 h-56 bg-slate-800 p-4"
+      />
+      <div className="flex">
+        <button
+          className="block flex-1 content-center justify-center bg-slate-600"
+          onClick={handleWords}
+        >
+          Calculate
+        </button>
+        <button
+          className="block flex-1 content-center justify-center bg-slate-900"
+          onClick={handleReset}
+        >
+          Reset
+        </button>
+      </div>
+
+      <p className="mx-10 my-2 italic text-stone-400">
+        For strings longer than 5 characters, only the first 5 characters will
+        be tallied
+      </p>
     </div>
   );
 };

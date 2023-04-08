@@ -40,7 +40,7 @@ const RankedWords = ({ letters, words }: Props) => {
 
   return (
     <div className="flex-1">
-      <h2 className="text-3xl text-left">Results:</h2>
+      <h2 className="text-left text-3xl">Results:</h2>
       <div className="text-left">
         {Object.keys(wordCounts).length > 0 &&
           Object.entries(wordCounts)
