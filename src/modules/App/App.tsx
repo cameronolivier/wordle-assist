@@ -14,14 +14,7 @@ import { type Maybe } from '~/types';
 const App = () => {
   const [words, setWords] = useState<Maybe<string[]>>();
   const [filteredWords, setFilteredWords] = useState<Maybe<string[]>>();
-
   const [letters, setLetters] = useState<Letters>({});
-
-  useEffect(() => {
-    console.log({ x: 'app', words });
-  }, [words]);
-
-  const results = filteredWords ? filteredWords : words;
 
   return (
     <div className="flex min-h-screen content-center justify-center bg-slate-900">
@@ -30,18 +23,18 @@ const App = () => {
         fallback={<Header className="mt-20">Something went wrong.</Header>}
       >
         <div className="mt-5">
-          <Header>Wordle Assist</Header>
-          <div className="flex flex-col md:flex-row">
-            <div className="mr-10 flex flex-col">
+          <Header className="mb-10 px-10">Wordle Assist</Header>
+          <div className="flex w-screen flex-col px-10 md:flex-row">
+            <div className="mr-10 flex flex-1 flex-col">
               <WordEntryField onWordsUpdate={setWords} />
               <WordFilterRules
                 words={words}
                 onFilterUpdate={setFilteredWords}
               />
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-1 flex-col">
               <LetterCount words={filteredWords} onLettersUpdate={setLetters} />
-              <RankedWords letters={letters} words={results} />
+              <RankedWords letters={letters} words={filteredWords} />
             </div>
           </div>
         </div>

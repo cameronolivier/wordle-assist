@@ -54,7 +54,7 @@ const WordFilterRules = ({ words, onFilterUpdate }: Props) => {
         </Button>
       </div>
 
-      <Text className="mx-10 my-2 italic text-stone-400">
+      <Text className="my-2 italic text-stone-400">
         EG: if the letter A in the first spot is yellow, then enter: A1-
       </Text>
     </div>

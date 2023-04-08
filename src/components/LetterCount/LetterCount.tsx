@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import Header from '~/components/Heading';
+import Text from '~/components/Text';
 import { type Maybe } from '~/types';
 
 export type Letters = Record<string, number>;
@@ -47,9 +48,9 @@ export const LetterCount = ({ words, onLettersUpdate }: Props) => {
       <div>
         {Object.keys(letters).length > 0 &&
           Object.entries(letters).map((entry) => (
-            <p key={entry[0]} className="text-left">
+            <pre key={entry[0]} className="text-left text-slate-300">
               {entry[0]}: {entry[1]}
-            </p>
+            </pre>
           ))}
       </div>
     </div>

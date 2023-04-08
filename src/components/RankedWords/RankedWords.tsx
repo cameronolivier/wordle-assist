@@ -41,7 +41,7 @@ const RankedWords = ({ letters, words }: Props) => {
   }, [letters, words]);
 
   return (
-    <div className="flex-1">
+    <div className="mt-10 flex-1">
       <Header className="text-left text-3xl">Results:</Header>
       <div className="text-left">
         {Object.keys(wordCounts).length > 0 &&
@@ -49,7 +49,7 @@ const RankedWords = ({ letters, words }: Props) => {
             .sort((a, b) => b[1].count - a[1].count)
             .map((entry) => (
               <div key={entry[0]}>
-                <pre>
+                <pre className="text-slate-300">
                   {entry[0]}: {entry[1].count}
                 </pre>
               </div>

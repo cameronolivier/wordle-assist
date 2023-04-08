@@ -18,7 +18,6 @@ const WordEntryField = ({ onWordsUpdate }: Props) => {
 
   const handleWords = () => {
     if (wordsRef.current != null) {
-      console.log(wordsRef.current.value);
       const wordList = wordsRef.current?.value.split('\n');
       setWords(wordList);
     }
@@ -31,7 +30,7 @@ const WordEntryField = ({ onWordsUpdate }: Props) => {
   };
 
   return (
-    <div className="mb-20 flex flex-1 flex-col">
+    <div className="mb-10 flex flex-1 flex-col">
       <Text className="text-slate-300">Enter your list of 5 letter words:</Text>
       <textarea
         ref={wordsRef}
@@ -47,7 +46,7 @@ const WordEntryField = ({ onWordsUpdate }: Props) => {
         </Button>
       </div>
 
-      <Text className="mx-10 my-2 italic text-stone-400">
+      <Text className="my-2 italic text-stone-400">
         For strings longer than 5 characters, only the first 5 characters will
         be tallied.
       </Text>
