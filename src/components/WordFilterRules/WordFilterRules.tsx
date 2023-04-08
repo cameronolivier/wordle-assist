@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
+import Button from '~/components/Button';
 import { type Maybe } from '~/types';
 
 import { filterWords } from './WordFilterRules.utils';
@@ -41,21 +42,15 @@ const WordFilterRules = ({ words, onFilterUpdate }: Props) => {
       <textarea
         ref={wordFilterRef}
         rows={20}
-        className="text-l ls-1 mb-2 h-56 p-4"
+        className="mb-2 h-48 bg-slate-800 p-4 text-slate-200"
       />
       <div className="flex">
-        <button
-          className="block flex-1 content-center justify-center"
-          onClick={handleRules}
-        >
+        <Button variant="primary" onClick={handleRules}>
           Calculate
-        </button>
-        <button
-          className="block flex-1 content-center  justify-center"
-          onClick={handleReset}
-        >
+        </Button>
+        <Button variant="secondary" onClick={handleReset}>
           Reset
-        </button>
+        </Button>
       </div>
 
       <p className="mx-10 my-2 italic text-stone-400">

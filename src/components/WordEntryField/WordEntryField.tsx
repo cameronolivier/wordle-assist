@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
+import Button from '~/components/Button';
 import Text from '~/components/Text';
 import { type Maybe } from '~/types';
 
@@ -11,11 +12,13 @@ const WordEntryField = ({ onWordsUpdate }: Props) => {
   const wordsRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
+    console.log({ words });
     onWordsUpdate(words);
   }, [onWordsUpdate, words]);
 
   const handleWords = () => {
     if (wordsRef.current != null) {
+      console.log(wordsRef.current.value);
       const wordList = wordsRef.current?.value.split('\n');
       setWords(wordList);
     }
@@ -32,28 +35,21 @@ const WordEntryField = ({ onWordsUpdate }: Props) => {
       <Text className="text-slate-300">Enter your list of 5 letter words:</Text>
       <textarea
         ref={wordsRef}
-        rows={20}
-        onBlur={handleWords}
-        className="text-l ls-1 mb-2 h-56 bg-slate-800 p-4"
+        rows={10}
+        className="mb-2 h-56 bg-slate-800 p-4 text-slate-200"
       />
       <div className="flex">
-        <button
-          className="block flex-1 content-center justify-center bg-slate-600"
-          onClick={handleWords}
-        >
+        <Button onClick={handleWords} variant="primary">
           Calculate
-        </button>
-        <button
-          className="block flex-1 content-center justify-center bg-slate-900"
-          onClick={handleReset}
-        >
+        </Button>
+        <Button variant="secondary" onClick={handleReset}>
           Reset
-        </button>
+        </Button>
       </div>
 
       <p className="mx-10 my-2 italic text-stone-400">
         For strings longer than 5 characters, only the first 5 characters will
-        be tallied
+        be tallied.
       </p>
     </div>
   );

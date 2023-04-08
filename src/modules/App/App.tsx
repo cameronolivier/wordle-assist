@@ -1,13 +1,15 @@
 import './App.css';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { Toaster } from 'react-hot-toast';
 
+import ErrorBoundary from '~/components/ErrorBoundary';
+import Header from '~/components/Heading';
 import { LetterCount, type Letters } from '~/components/LetterCount';
+import RankedWords from '~/components/RankedWords';
 import WordEntryField from '~/components/WordEntryField';
+import WordFilterRules from '~/components/WordFilterRules';
 import { type Maybe } from '~/types';
-
-import RankedWords from '../../components/RankedWords';
-import WordFilterRules from '../../components/WordFilterRules';
 
 const App = () => {
   const [words, setWords] = useState<Maybe<string[]>>();
@@ -15,19 +17,35 @@ const App = () => {
 
   const [letters, setLetters] = useState<Letters>({});
 
+  useEffect(() => {
+    console.log({ x: 'app', words });
+  }, [words]);
+
+  const results = filteredWords ? filteredWords : words;
+
   return (
     <div className="flex min-h-screen content-center justify-center bg-slate-900">
-      <h1 className="mb-10">Wordle Assist</h1>
-      <div className="flex flex-col md:flex-row">
-        <div className="mr-10 flex flex-col">
-          <WordEntryField onWordsUpdate={setWords} />
-          <WordFilterRules words={words} onFilterUpdate={setFilteredWords} />
+      <Toaster position="bottom-center" />
+      <ErrorBoundary
+        fallback={<Header className="mt-20">Something went wrong.</Header>}
+      >
+        <div className="mt-5">
+          <Header>Wordle Assist</Header>
+          <div className="flex flex-col md:flex-row">
+            <div className="mr-10 flex flex-col">
+              <WordEntryField onWordsUpdate={setWords} />
+              <WordFilterRules
+                words={words}
+                onFilterUpdate={setFilteredWords}
+              />
+            </div>
+            <div className="flex flex-col">
+              <LetterCount words={filteredWords} onLettersUpdate={setLetters} />
+              <RankedWords letters={letters} words={results} />
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col">
-          <LetterCount words={filteredWords} onLettersUpdate={setLetters} />
-          <RankedWords letters={letters} words={filteredWords} />
-        </div>
-      </div>
+      </ErrorBoundary>
     </div>
   );
 };

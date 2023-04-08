@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import { type Maybe } from '../../types';
+import { type Maybe } from '~/types';
+
 import { type Letters } from '../LetterCount';
 
 interface WordCount {
@@ -46,11 +47,11 @@ const RankedWords = ({ letters, words }: Props) => {
           Object.entries(wordCounts)
             .sort((a, b) => b[1].count - a[1].count)
             .map((entry) => (
-              <p key={entry[0]}>
+              <div key={entry[0]}>
                 <pre>
                   {entry[0]}: {entry[1].count}
                 </pre>
-              </p>
+              </div>
             ))}
       </div>
     </div>

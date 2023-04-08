@@ -1,5 +1,9 @@
+import { ReactNode } from 'react';
+
+import { tw } from '~/utils/tailwind.utils';
+
 type Props = {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
 };
 export default function Text({ children, className }: Props) {
