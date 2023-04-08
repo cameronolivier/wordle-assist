@@ -17,10 +17,13 @@
     "baseUrl": ".",
     "paths": {
       "~/*": ["src/*"],
-      "test/*": ["test/*"],
+      "test/*": ["test/*"]
     },
     "jsx": "react-jsx"
   },
-  "include": ["src"],
+  "include": [
+    "src",
+    "node_modules/.pnpm/vitest@0.29.8_@vitest+ui@0.29.8_jsdom@21.1.1/node_modules/vitest/globals.d.ts"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
