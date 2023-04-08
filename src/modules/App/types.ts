@@ -1,5 +1,6 @@
-import { Maybe } from '../../types'
-import { letters, letterStates } from './App.constants'
+import { type Maybe } from '../../types';
+
+import { letters, type letterStates } from './App.constants';
 
 export type Letter =
   | 'A'
@@ -27,26 +28,13 @@ export type Letter =
   | 'W'
   | 'X'
   | 'Y'
-  | 'Z'
+  | 'Z';
 
-export type LetterState = typeof letterStates[keyof typeof letterStates]
+export type LetterState = typeof letterStates[keyof typeof letterStates];
 
-export type Char = {
-  letter: Maybe<Letter>
-  state: LetterState
+export interface Char {
+  letter: Maybe<Letter>;
+  state: LetterState;
 }
-export type Word = [
-  Maybe<Char>,
-  Maybe<Char>,
-  Maybe<Char>,
-  Maybe<Char>,
-  Maybe<Char>,
-]
-export type Card = [
-  Maybe<Word>,
-  Maybe<Word>,
-  Maybe<Word>,
-  Maybe<Word>,
-  Maybe<Word>,
-  Maybe<Word>,
-]
+export type Word = [Maybe<Char>, Maybe<Char>, Maybe<Char>, Maybe<Char>, Maybe<Char>];
+export type Card = [Maybe<Word>, Maybe<Word>, Maybe<Word>, Maybe<Word>, Maybe<Word>, Maybe<Word>];

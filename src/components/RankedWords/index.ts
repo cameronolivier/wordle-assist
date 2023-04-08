@@ -1,1 +1,1 @@
-export { default } from './RankedWords'
+export { default } from './RankedWords';

@@ -1,9 +1,14 @@
 module.exports = {
-  semi: false,
-  allowParens: 'avoid',
+  plugins: ['@ianvs/prettier-plugin-sort-imports'],
+  printWidth: 140,
   singleQuote: true,
-  trailingComma: 'all',
-  quoteProps: 'consistent',
-  importOrder: ["^~/(.*)$", "^[../]", "^[./]"],
-  importOrderSeparation: true
-}
+  tabWidth: 2,
+  trailingComma: 'es5',
+  importOrder: ['^~/(.*)$', '^../(.*)$', '^[./]'],
+  importOrderBuiltinModulesToTop: true,
+  importOrderCaseInsensitive: true,
+  importOrderMergeDuplicateImports: true,
+  importOrderCombineTypeAndValueImports: false,
+  importOrderSeparation: true,
+  importOrderSortSpecifiers: true,
+};

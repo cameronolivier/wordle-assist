@@ -1,40 +1,41 @@
-import { useEffect, useState } from 'react'
-import { Maybe } from '../../types'
+import { useEffect, useState } from 'react';
 
-export type Letters = Record<string, number>
+import { type Maybe } from '../../types';
 
-type Props = {
-  words: Maybe<string[]>
-  onLettersUpdate: (letters: Letters) => void
+export type Letters = Record<string, number>;
+
+interface Props {
+  words: Maybe<string[]>;
+  onLettersUpdate: (letters: Letters) => void;
 }
 export const LetterCount = ({ words, onLettersUpdate }: Props) => {
-  const [letters, setLetters] = useState<Letters>({})
+  const [letters, setLetters] = useState<Letters>({});
 
   useEffect(() => {
-    onLettersUpdate(letters)
-  }, [letters, onLettersUpdate])
+    onLettersUpdate(letters);
+  }, [letters, onLettersUpdate]);
 
   useEffect(() => {
-    const _letters: Letters = {}
-    if (words && words.length > 0) {
+    const _letters: Letters = {};
+    if (words != null && words.length > 0) {
       words.forEach((word) => {
         word
           .split('')
           .slice(0, 5)
           .forEach((char, index) => {
             if (index > word.indexOf(char)) {
-              const key = `${char}${char}`
-              const curr = _letters.hasOwnProperty(key) ? _letters[key] : 0
-              _letters[key] = curr + 1
+              const key = `${char}${char}`;
+              const curr = _letters.hasOwnProperty(key) ? _letters[key] : 0;
+              _letters[key] = curr + 1;
             } else {
-              const curr = _letters.hasOwnProperty(char) ? _letters[char] : 0
-              _letters[char] = curr + 1
+              const curr = _letters.hasOwnProperty(char) ? _letters[char] : 0;
+              _letters[char] = curr + 1;
             }
-          })
-      })
-      setLetters(_letters)
+          });
+      });
+      setLetters(_letters);
     }
-  }, [words])
+  }, [words]);
   return (
     <div className="flex-1">
       <h2 className="text-3xl text-left">Letter Counts:</h2>
@@ -47,5 +48,5 @@ export const LetterCount = ({ words, onLettersUpdate }: Props) => {
           ))}
       </div>
     </div>
-  )
-}
+  );
+};

@@ -1,15 +1,19 @@
-import './App.css'
-import { useState } from 'react'
-import { LetterCount, Letters } from '../../components/LetterCount'
-import RankedWords from '../../components/RankedWords'
-import WordEntryField from '../../components/WordEntryField'
-import WordFilterRules from '../../components/WordFilterRules'
-import { Maybe } from '../../types'
-const App = () => {
-  const [words, setWords] = useState<Maybe<string[]>>()
-  const [filteredWords, setFilteredWords] = useState<Maybe<string[]>>()
+import './App.css';
 
-  const [letters, setLetters] = useState<Letters>({})
+import { useState } from 'react';
+
+import { LetterCount, type Letters } from '~/components/LetterCount';
+import WordEntryField from '~/components/WordEntryField';
+import { type Maybe } from '~/types';
+
+import RankedWords from '../../components/RankedWords';
+import WordFilterRules from '../../components/WordFilterRules';
+
+const App = () => {
+  const [words, setWords] = useState<Maybe<string[]>>();
+  const [filteredWords, setFilteredWords] = useState<Maybe<string[]>>();
+
+  const [letters, setLetters] = useState<Letters>({});
 
   return (
     <div className="App">
@@ -25,10 +29,10 @@ const App = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
 
 // TODO:
 //  1. we want a visual representation of the card that can take user feedback. First via adding

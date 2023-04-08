@@ -1,1 +1,1 @@
-export * from './LetterCount'
+export * from './LetterCount';

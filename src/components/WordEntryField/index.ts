@@ -1,1 +1,1 @@
-export { default } from './WordEntryField'
+export { default } from './WordEntryField';

@@ -1,5 +1,5 @@
-import { filterWords } from './WordFilterRules.utils'
-import * as SUT from './WordFilterRules.utils'
+import { filterWords } from './WordFilterRules.utils';
+import * as SUT from './WordFilterRules.utils';
 
 describe('WordFilterRules.utils', () => {
   describe('rulesFilter', () => {
@@ -11,15 +11,15 @@ describe('WordFilterRules.utils', () => {
       ['chaws', false],
     ])('should filter %s by the provided rules', (word, expected) => {
       // given ...
-      const rules = ['a1-', 's4+']
+      const rules = ['a1-', 's4+'];
 
       // when ...
 
-      const result = SUT.rulesFilter(rules)(word)
+      const result = SUT.rulesFilter(rules)(word);
       // then ... should filter a given word by the provided rules
-      expect(result).toBe(expected)
-    })
-  })
+      expect(result).toBe(expected);
+    });
+  });
   describe('filterWords', () => {
     it('should correctly filter out words based on the provided rules', () => {
       // given ... a list of words
@@ -38,17 +38,17 @@ describe('WordFilterRules.utils', () => {
         'chaws',
         'dhaks',
         'gawks',
-      ]
+      ];
 
-      const rules = ['a1-', 'S4+']
+      const rules = ['a1-', 'S4+'];
       // when ...
-      const result = SUT.filterWords(rules, wordsMock)
+      const result = SUT.filterWords(rules, wordsMock);
       // then ...
-      expect(result).toEqual(['chasm', 'flask', 'flash', 'hawse', 'swash'])
-    })
+      expect(result).toEqual(['chasm', 'flask', 'flash', 'hawse', 'swash']);
+    });
     it('should return an empty array if no data is passed in', () => {
-      const result = SUT.filterWords(undefined, undefined)
-      expect(result).toEqual([])
-    })
-  })
-})
+      const result = SUT.filterWords(undefined, undefined);
+      expect(result).toEqual([]);
+    });
+  });
+});

@@ -3,7 +3,7 @@ export const letterStates = {
   included: 'included',
   placed: 'placed',
   notSet: 'notSet',
-} as const
+} as const;
 
 export const letters = {
   A: 'A',
@@ -32,4 +32,4 @@ export const letters = {
   X: 'X',
   Y: 'Y',
   Z: 'Z',
-} as const
+} as const;

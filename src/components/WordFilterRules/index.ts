@@ -1,1 +1,1 @@
-export { default } from './WordFilterRules'
+export { default } from './WordFilterRules';

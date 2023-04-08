@@ -1,52 +1,55 @@
-import { FocusEvent, useEffect, useRef, useState } from 'react'
-import { Maybe } from '../../types'
-import { filterWords } from './WordFilterRules.utils'
+import { FocusEvent, useEffect, useRef, useState } from 'react';
 
-type Props = {
-  words: Maybe<string[]>
-  onFilterUpdate: (words: Maybe<string[]>) => void
+import { type Maybe } from '../../types';
+
+import { filterWords } from './WordFilterRules.utils';
+
+interface Props {
+  words: Maybe<string[]>;
+  onFilterUpdate: (words: Maybe<string[]>) => void;
 }
 
 const WordFilterRules = ({ words, onFilterUpdate }: Props) => {
-  const wordFilterRef = useRef<HTMLTextAreaElement>(null)
-  const [rules, setRules] = useState<string[]>([])
+  const wordFilterRef = useRef<HTMLTextAreaElement>(null);
+  const [rules, setRules] = useState<string[]>([]);
 
   useEffect(() => {
-    if (rules && words) {
-      const wordsFiltered = filterWords(rules, words)
-      onFilterUpdate(wordsFiltered)
+    if (rules && words != null) {
+      const wordsFiltered = filterWords(rules, words);
+      onFilterUpdate(wordsFiltered);
     }
-  }, [rules, words])
+  }, [rules, words]);
 
   const handleRules = () => {
-    if (wordFilterRef.current) {
-      const letterRules = wordFilterRef.current?.value.split('\n')
-      setRules(letterRules)
+    if (wordFilterRef.current != null) {
+      const letterRules = wordFilterRef.current.value.split('\n');
+      setRules(letterRules);
     }
-  }
+  };
+  const handleReset = () => {
+    if (wordFilterRef.current != null) {
+      wordFilterRef.current.value = '';
+    }
+  };
 
   return (
     <div className="flex flex-col flex-1">
       <p className="text-gray-300">
-        Enter each letter, the index, and whether it's <strong>+</strong> for
-        placed (green) or <strong>-</strong> for excluded (yellow)
+        Enter each letter, the index, and whether it's <strong>+</strong> for placed (green) or <strong>-</strong> for excluded (yellow)
       </p>
-      <textarea
-        ref={wordFilterRef}
-        rows={20}
-        className="h-56 text-l ls-1 p-4 mb-2"
-      />
-      <button
-        className="block justify-center content-center"
-        onClick={handleRules}
-      >
-        Calculate
-      </button>
-      <p className="italic text-stone-400 mx-10 my-2">
-        EG: if the letter A in the first spot is yellow, then enter: A1-
-      </p>
-    </div>
-  )
-}
+      <textarea ref={wordFilterRef} rows={20} className="h-56 text-l ls-1 p-4 mb-2" />
+      <div className="flex">
+        <button className="block justify-center content-center flex-1" onClick={handleRules}>
+          Calculate
+        </button>
+        <button className="block justify-center content-center  flex-1" onClick={handleReset}>
+          Reset
+        </button>
+      </div>
 
-export default WordFilterRules
+      <p className="italic text-stone-400 mx-10 my-2">EG: if the letter A in the first spot is yellow, then enter: A1-</p>
+    </div>
+  );
+};
+
+export default WordFilterRules;

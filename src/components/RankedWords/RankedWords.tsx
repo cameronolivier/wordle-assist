@@ -1,22 +1,23 @@
-import { useEffect, useState } from 'react'
-import { Maybe } from '../../types'
-import { Letters } from '../LetterCount'
+import { useEffect, useState } from 'react';
 
-type WordCount = {
-  count: number
+import { type Maybe } from '../../types';
+import { type Letters } from '../LetterCount';
+
+interface WordCount {
+  count: number;
 }
-type WordCounts = Record<string, WordCount>
+type WordCounts = Record<string, WordCount>;
 
-type Props = {
-  letters: Letters
-  words: Maybe<string[]>
+interface Props {
+  letters: Letters;
+  words: Maybe<string[]>;
 }
 const RankedWords = ({ letters, words }: Props) => {
-  const [wordCounts, setWordCounts] = useState<WordCounts>({})
+  const [wordCounts, setWordCounts] = useState<WordCounts>({});
 
   useEffect(() => {
-    if (Object.keys(letters).length > 0 && words && words.length > 0) {
-      const _wordCounts: WordCounts = {}
+    if (Object.keys(letters).length > 0 && words != null && words.length > 0) {
+      const _wordCounts: WordCounts = {};
       words.forEach((word) => {
         _wordCounts[word.slice(0, 5)] = {
           count: word
@@ -24,18 +25,18 @@ const RankedWords = ({ letters, words }: Props) => {
             .slice(0, 5)
             .map((letter, index) => {
               if (index > word.indexOf(letter)) {
-                return `${letter}${letter}`
+                return `${letter}${letter}`;
               }
-              return letter
+              return letter;
             })
             .reduce((acc, curr): number => {
-              return letters[curr] + acc
+              return letters[curr] + acc;
             }, 0),
-        }
-      })
-      setWordCounts(_wordCounts)
+        };
+      });
+      setWordCounts(_wordCounts);
     }
-  }, [letters, words])
+  }, [letters, words]);
 
   return (
     <div className="flex-1">
@@ -53,7 +54,7 @@ const RankedWords = ({ letters, words }: Props) => {
             ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default RankedWords
+export default RankedWords;
