@@ -47,10 +47,10 @@ const WordEntryField = ({ onWordsUpdate }: Props) => {
         </Button>
       </div>
 
-      <p className="mx-10 my-2 italic text-stone-400">
+      <Text className="mx-10 my-2 italic text-stone-400">
         For strings longer than 5 characters, only the first 5 characters will
         be tallied.
-      </p>
+      </Text>
     </div>
   );
 };

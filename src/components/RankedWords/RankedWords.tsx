@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+import Header from '~/components/Heading';
 import { type Maybe } from '~/types';
 
 import { type Letters } from '../LetterCount';
@@ -41,7 +42,7 @@ const RankedWords = ({ letters, words }: Props) => {
 
   return (
     <div className="flex-1">
-      <h2 className="text-left text-3xl">Results:</h2>
+      <Header className="text-left text-3xl">Results:</Header>
       <div className="text-left">
         {Object.keys(wordCounts).length > 0 &&
           Object.entries(wordCounts)
