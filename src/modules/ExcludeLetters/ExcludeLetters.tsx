@@ -35,7 +35,7 @@ export default function ExcludeLetters({
 
   return (
     <div className={className}>
-      <Text className="text-slate-300">Enter excluded letters:</Text>
+      <Text className="text-slate-300">3: Enter excluded letters:</Text>
       <input
         ref={excludedLetterRef}
         className="mb-2 w-full bg-slate-800 p-4 text-slate-200"

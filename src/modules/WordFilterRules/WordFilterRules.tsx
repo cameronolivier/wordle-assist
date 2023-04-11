@@ -37,7 +37,7 @@ const WordFilterRules = ({ words, onFilterUpdate, className }: Props) => {
 
   return (
     <div className={className}>
-      <Text>Enter green and yellow letters:</Text>
+      <Text>2: Enter green and yellow letters:</Text>
       <Text className="my-2 italic text-stone-400">
         <strong>Format:</strong> [Letter][Position][+/-]
         <br />

@@ -49,7 +49,8 @@ const WordEntryField = ({ onWordsUpdate, className }: Props) => {
     <div className={className}>
       <div className="mb-5 flex flex-col">
         <Text className="text-slate-300">
-          Enter to convert a flat string into enter-delimited list (Optional):
+          0: Enter to convert a flat string into enter-delimited list
+          (Optional):
         </Text>
         <input
           ref={unstyledRef}
@@ -64,7 +65,9 @@ const WordEntryField = ({ onWordsUpdate, className }: Props) => {
           </Button>
         </div>
       </div>
-      <Text className="text-slate-300">Enter your list of 5 letter words:</Text>
+      <Text className="text-slate-300">
+        1: Enter your list of 5 letter words:
+      </Text>
       <textarea
         ref={wordsRef}
         rows={15}
