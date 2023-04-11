@@ -13,8 +13,9 @@ type WordCounts = Record<string, WordCount>;
 interface Props {
   letters: Letters;
   words: Maybe<string[]>;
+  className?: string;
 }
-const RankedWords = ({ letters, words }: Props) => {
+const RankedWords = ({ letters, words, className }: Props) => {
   const [wordCounts, setWordCounts] = useState<WordCounts>({});
 
   useEffect(() => {
@@ -41,7 +42,7 @@ const RankedWords = ({ letters, words }: Props) => {
   }, [letters, words]);
 
   return (
-    <div className="mt-10 flex-1">
+    <div className={className}>
       <Header className="text-left text-3xl">Results:</Header>
       <div className="text-left">
         {Object.keys(wordCounts).length > 0 &&

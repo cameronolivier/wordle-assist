@@ -9,9 +9,10 @@ import { filterWords } from './WordFilterRules.utils';
 interface Props {
   words: Maybe<string[]>;
   onFilterUpdate: (words: Maybe<string[]>) => void;
+  className?: string;
 }
 
-const WordFilterRules = ({ words, onFilterUpdate }: Props) => {
+const WordFilterRules = ({ words, onFilterUpdate, className }: Props) => {
   const wordFilterRef = useRef<HTMLTextAreaElement>(null);
   const [rules, setRules] = useState<string[]>([]);
 
@@ -35,11 +36,17 @@ const WordFilterRules = ({ words, onFilterUpdate }: Props) => {
   };
 
   return (
-    <div className="flex flex-1 flex-col">
-      <Text>
-        Enter each letter, the index, and whether it&apos;s <strong>+</strong>{' '}
-        for placed (green) or <strong>-</strong> for excluded (yellow)
+    <div className={className}>
+      <Text>Enter green and yellow letters:</Text>
+      <Text className="my-2 italic text-stone-400">
+        <strong>Format:</strong> [Letter][Position][+/-]
+        <br />
+        Denote <strong>placed letters </strong> with a <strong>+</strong>.
+        <br />
+        Denote <strong>incorrectly placed letters </strong> with a{' '}
+        <strong>-</strong>.
       </Text>
+
       <textarea
         ref={wordFilterRef}
         rows={20}
@@ -47,10 +54,10 @@ const WordFilterRules = ({ words, onFilterUpdate }: Props) => {
       />
       <div className="flex">
         <Button variant="primary" onClick={handleRules}>
-          Calculate
+          Filter List
         </Button>
         <Button variant="secondary" onClick={handleReset}>
-          Reset
+          Clear
         </Button>
       </div>
 
