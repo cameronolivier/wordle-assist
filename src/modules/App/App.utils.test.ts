@@ -1,4 +1,4 @@
-import * as SUT from './WordFilterRules.utils';
+import * as SUT from './App.utils';
 
 describe('WordFilterRules.utils', () => {
   describe('rulesFilter', () => {

@@ -1,70 +1,50 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 
 import Button from '~/components/Button';
 import Text from '~/components/Text';
-import { type Maybe } from '~/types';
+
+import UnformattedWords from './UnformattedWords';
+import WordLists from './Wordlists';
 
 interface Props {
-  onWordsUpdate: (words: Maybe<string[]>) => void;
+  onWordsUpdate: (words: string[]) => void;
   className?: string;
 }
 const WordEntryField = ({ onWordsUpdate, className }: Props) => {
-  const [words, setWords] = useState<string[]>();
   const wordsRef = useRef<HTMLTextAreaElement>(null);
-  const unstyledRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    console.log({ words });
-    onWordsUpdate(words);
-  }, [onWordsUpdate, words]);
-
-  const handleStyleWords = () => {
-    if (unstyledRef.current != null && wordsRef.current != null) {
-      wordsRef.current.value = (
-        unstyledRef.current.value.match(/.{1,5}/g) ?? []
-      ).join('\n');
-    }
-  };
-
-  const resetStyleWords = () => {
-    if (unstyledRef.current != null) {
-      unstyledRef.current.value = '';
-    }
-  };
-
-  const handleWords = () => {
+  const handleWordsFieldUpdate = (words: string) => {
     if (wordsRef.current != null) {
-      const wordList = wordsRef.current.value.split('\n');
-      setWords(wordList);
+      wordsRef.current.value = words;
     }
+  };
+
+  const handleWords = async () => {
+    const handleLongLists = new Promise<string[]>((resolve, reject) => {
+      if (wordsRef.current != null) {
+        try {
+          const longList = wordsRef.current.value.split('\n');
+          resolve(longList);
+        } catch (error) {
+          reject(error);
+        }
+      }
+    });
+    const words = await handleLongLists;
+    onWordsUpdate(words);
   };
 
   const handleReset = () => {
     if (wordsRef.current != null) {
       wordsRef.current.value = '';
+      onWordsUpdate([]);
     }
   };
 
   return (
     <div className={className}>
-      <div className="mb-5 flex flex-col">
-        <Text className="text-slate-300">
-          0: Enter to convert a flat string into enter-delimited list
-          (Optional):
-        </Text>
-        <input
-          ref={unstyledRef}
-          className="mb-2 w-full bg-slate-800 p-4 text-slate-200"
-        />
-        <div className="flex">
-          <Button onClick={handleStyleWords} variant="primary">
-            Style
-          </Button>
-          <Button variant="secondary" onClick={resetStyleWords}>
-            Clear
-          </Button>
-        </div>
-      </div>
+      <UnformattedWords onWordsUpdate={handleWordsFieldUpdate} />
+      <WordLists onWordsUpdate={handleWordsFieldUpdate} />
       <Text className="text-slate-300">
         1: Enter your list of 5 letter words:
       </Text>
@@ -81,7 +61,6 @@ const WordEntryField = ({ onWordsUpdate, className }: Props) => {
           Clear
         </Button>
       </div>
-
       <Text className="my-2 italic text-stone-400">
         For strings longer than 5 characters, only the first 5 characters will
         be tallied.

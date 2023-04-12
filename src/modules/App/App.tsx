@@ -1,6 +1,6 @@
 import './App.css';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Toaster } from 'react-hot-toast';
 
 import ErrorBoundary from '~/components/ErrorBoundary';
@@ -10,12 +10,37 @@ import { LetterCount, type Letters } from '~/modules/LetterCount';
 import RankedWords from '~/modules/RankedWords';
 import WordEntryField from '~/modules/WordEntryField';
 import WordFilterRules from '~/modules/WordFilterRules';
-import { type Maybe } from '~/types';
+
+import { filterOnExcludedLetters, filterWords } from './App.utils';
 
 const App = () => {
-  const [words, setWords] = useState<Maybe<string[]>>();
-  const [filteredWords, setFilteredWords] = useState<Maybe<string[]>>();
+  const [words, setWords] = useState<string[]>([]);
   const [letters, setLetters] = useState<Letters>({});
+  const [excludedLetters, setExcludedLetters] = useState<string[]>([]);
+  const [filterRules, setFilterRules] = useState<string[]>([]);
+  const [filteredWords, setFilteredWords] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (words.length === 0) {
+      return setFilteredWords([]);
+    }
+
+    const updateFilteredWords = async () => {
+      const filteredOnExcludedLetters =
+        excludedLetters.length > 0
+          ? await filterOnExcludedLetters(words, excludedLetters)
+          : words;
+
+      const w =
+        filterRules.length > 0
+          ? await filterWords(filteredOnExcludedLetters, filterRules)
+          : filteredOnExcludedLetters;
+
+      setFilteredWords(w);
+    };
+
+    updateFilteredWords();
+  }, [excludedLetters, filterRules, words]);
 
   return (
     <div className="flex min-h-screen content-center justify-center bg-slate-900">
@@ -35,12 +60,10 @@ const App = () => {
             <div className="mr-10 flex flex-1 flex-col">
               <ExcludeLetters
                 className="mb-10"
-                words={filteredWords}
-                onRemoveLetters={setFilteredWords}
+                onRemoveLetters={setExcludedLetters}
               />
               <WordFilterRules
-                words={words}
-                onFilterUpdate={setFilteredWords}
+                onSetFilters={setFilterRules}
                 className="flex flex-1 flex-col"
               />
             </div>

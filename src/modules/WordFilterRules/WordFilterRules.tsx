@@ -1,37 +1,26 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 
 import Button from '~/components/Button';
 import Text from '~/components/Text';
-import { type Maybe } from '~/types';
-
-import { filterWords } from './WordFilterRules.utils';
 
 interface Props {
-  words: Maybe<string[]>;
-  onFilterUpdate: (words: Maybe<string[]>) => void;
+  onSetFilters: (rules: string[]) => void;
   className?: string;
 }
 
-const WordFilterRules = ({ words, onFilterUpdate, className }: Props) => {
+const WordFilterRules = ({ onSetFilters, className }: Props) => {
   const wordFilterRef = useRef<HTMLTextAreaElement>(null);
-  const [rules, setRules] = useState<string[]>([]);
-
-  useEffect(() => {
-    if (rules && words != null) {
-      const wordsFiltered = filterWords(rules, words);
-      onFilterUpdate(wordsFiltered);
-    }
-  }, [onFilterUpdate, rules, words]);
 
   const handleRules = () => {
     if (wordFilterRef.current != null) {
       const letterRules = wordFilterRef.current.value.split('\n');
-      setRules(letterRules);
+      onSetFilters(letterRules);
     }
   };
   const handleReset = () => {
     if (wordFilterRef.current != null) {
       wordFilterRef.current.value = '';
+      onSetFilters([]);
     }
   };
 

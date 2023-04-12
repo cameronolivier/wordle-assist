@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 
 import Header from '~/components/Heading';
-import Text from '~/components/Text';
 import { type Maybe } from '~/types';
 
 export type Letters = Record<string, number>;
