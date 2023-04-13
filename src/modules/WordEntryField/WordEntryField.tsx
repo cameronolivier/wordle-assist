@@ -46,7 +46,7 @@ const WordEntryField = ({ onWordsUpdate, className }: Props) => {
       <UnformattedWords onWordsUpdate={handleWordsFieldUpdate} />
       <WordLists onWordsUpdate={handleWordsFieldUpdate} />
       <Text className="text-slate-300">
-        1: Enter your list of 5 letter words:
+        Add your list of 5 letter words to query:
       </Text>
       <textarea
         ref={wordsRef}
@@ -62,6 +62,8 @@ const WordEntryField = ({ onWordsUpdate, className }: Props) => {
         </Button>
       </div>
       <Text className="my-2 italic text-stone-400">
+        Each word should be on a new line.
+        <br />
         For strings longer than 5 characters, only the first 5 characters will
         be tallied.
       </Text>

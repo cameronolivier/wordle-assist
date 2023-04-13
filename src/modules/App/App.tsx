@@ -39,13 +39,15 @@ const App = () => {
         <div className="mt-5">
           <Header className="mb-10 px-10">Wordle Assist</Header>
           <div className="flex w-screen flex-col px-10 md:flex-row">
-            <div className="mr-5 flex">
+            <div className="mr-5 flex flex-col">
+              <Header className="mb-10">Words:</Header>
               <WordEntryField
                 onWordsUpdate={setWords}
                 className="mb-10 flex flex-1 flex-col"
               />
             </div>
             <div className="mr-10 flex flex-1 flex-col">
+              <Header className="mb-10">Filters:</Header>
               <ExcludeLetters
                 className="mb-10"
                 onRemoveLetters={setExcludedLetters}
@@ -55,13 +57,19 @@ const App = () => {
                 className="flex flex-1 flex-col"
               />
             </div>
-            <div className="flex flex-1 flex-col md:flex-row">
-              <LetterCount words={filteredWords} onLettersUpdate={setLetters} />
-              <RankedWords
-                letters={letters}
-                words={filteredWords}
-                className="mt-10 flex-1 md:mt-0"
-              />
+            <div className="mr-10 flex flex-1 flex-col">
+              <Header className="mb-10">Results:</Header>
+              <div className="flex flex-1 flex-col md:flex-row">
+                <LetterCount
+                  words={filteredWords}
+                  onLettersUpdate={setLetters}
+                />
+                <RankedWords
+                  letters={letters}
+                  words={filteredWords}
+                  className="mt-10 flex-1 md:mt-0"
+                />
+              </div>
             </div>
           </div>
         </div>

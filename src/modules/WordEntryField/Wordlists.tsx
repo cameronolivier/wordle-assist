@@ -33,8 +33,8 @@ export default function WordLists({ onWordsUpdate }: Props) {
   };
   return (
     <div className="mb-5 flex flex-col">
-      <Text className="text-slate-300">
-        0: Select a words list to prepopulate the list (Optional):
+      <Text className="mb-2 text-slate-300">
+        Select a words list to start (Optional):
       </Text>
       <div className="flex">
         <Button onClick={handleSelectList('words496')} variant="primary">
@@ -66,6 +66,9 @@ export default function WordLists({ onWordsUpdate }: Props) {
           words
         </Button>
       </div>
+      <Text className="my-2 italic text-stone-400">
+        Alternatively, you can enter your own list of words.
+      </Text>
     </div>
   );
 }

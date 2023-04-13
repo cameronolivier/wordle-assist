@@ -12,7 +12,7 @@ const WordFilterRules = ({ onSetFilters, className }: Props) => {
   const wordFilterRef = useRef<HTMLTextAreaElement>(null);
 
   const handleRules = () => {
-    if (wordFilterRef.current != null) {
+    if (wordFilterRef.current != null && wordFilterRef.current.value) {
       const letterRules = wordFilterRef.current.value.split('\n');
       onSetFilters(letterRules);
     }
@@ -26,16 +26,10 @@ const WordFilterRules = ({ onSetFilters, className }: Props) => {
 
   return (
     <div className={className}>
-      <Text>2: Enter green and yellow letters:</Text>
-      <Text className="my-2 italic text-stone-400">
-        <strong>Format:</strong> [Letter][Position][+/-]
-        <br />
-        Denote <strong>placed letters </strong> with a <strong>+</strong>.
-        <br />
-        Denote <strong>incorrectly placed letters </strong> with a{' '}
-        <strong>-</strong>.
+      <Text className="text-slate-300">Included letters:</Text>
+      <Text className="text-sm italic text-stone-400">
+        These are the green and yellow letters in the Wordle results.
       </Text>
-
       <textarea
         ref={wordFilterRef}
         rows={20}
@@ -43,15 +37,21 @@ const WordFilterRules = ({ onSetFilters, className }: Props) => {
       />
       <div className="flex">
         <Button variant="primary" onClick={handleRules}>
-          Filter List
+          Recalculate
         </Button>
         <Button variant="secondary" onClick={handleReset}>
           Clear
         </Button>
       </div>
-
       <Text className="my-2 italic text-stone-400">
-        EG: if the letter A in the first spot is yellow, then enter: A1-
+        Each rule should be on a new line.
+        <br />
+        <strong>Format:</strong> [Letter][Position][+/-]
+        <br />
+        Examples:
+        <br />
+        If the letter A in the first spot is yellow, then enter: A1- <br />
+        If the letter A in the first spot is green, then enter: A1+
       </Text>
     </div>
   );
