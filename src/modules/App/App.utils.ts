@@ -1,39 +1,54 @@
-import { type Maybe } from '~/types';
+export const filterWordOnLetterRules =
+  (letterRules: string[]) =>
+  (word: string): boolean => {
+    if (letterRules.length === 0) return true;
 
-export const rulesFilter =
-  (rules: string[] = []) =>
-  (word: string) => {
-    return rules.reduce((acc, rule) => {
-      const letter = word[parseInt(rule[1]) - 1].toLowerCase();
-      const condition = rule[0].toLowerCase();
-      const hasPassed =
-        rule[2] === '+' ? letter === condition : letter !== condition;
-      return acc && hasPassed;
-    }, true);
+    return letterRules.every((rule) => {
+      const [char, pos, state] = rule.split('');
+      const charIndex = parseInt(pos, 10) - 1;
+      const safeWord = word.toLowerCase();
+      const safeChar = char.toLowerCase();
+
+      if (!safeWord.includes(safeChar)) {
+        return false;
+      }
+
+      if (state === '+') {
+        return safeWord[charIndex] === safeChar;
+      }
+
+      if (state === '-') {
+        return safeWord[charIndex] !== safeChar;
+      }
+
+      return true;
+    });
   };
 
-export const filterWords = async (
-  rules: Maybe<string[]>,
-  words: Maybe<string[]>
-) => {
-  if (rules == null || words == null) {
-    return [];
+export const filterIncludedLetters =
+  (letterRules: string[]) => (words: string[]) => {
+    if (letterRules.length === 0 || words.length === 0) return words;
+
+    return words.filter(filterWordOnLetterRules(letterRules));
+  };
+
+export const filterRemovedLetters =
+  (letters: string[]) =>
+  (words: string[]): string[] => {
+    if (letters.length === 0 || words.length === 0) return words;
+
+    return words.filter((word) =>
+      letters.every((letter) => !word.includes(letter))
+    );
+  };
+
+export type filterFn = (words: string[]) => string[];
+export const filterWords = (filters: filterFn[]) => (words: string[]) => {
+  if (words.length === 0 || filters.length === 0) {
+    return words;
   }
-  return Promise.resolve(words.filter(rulesFilter(rules)));
-};
-
-export const filterOnExcludedLetters = async (
-  words: string[],
-  letters: string[]
-) => {
-  if (letters.length === 0 || words.length === 0) return Promise.resolve(words);
-
-  return Promise.resolve(
-    words.filter((word) => {
-      return letters.reduce(
-        (state, letter) => !word.includes(letter) && state,
-        true
-      );
-    })
+  return filters.reduce(
+    (filtered: string[], filter: filterFn) => filter(filtered),
+    words
   );
 };

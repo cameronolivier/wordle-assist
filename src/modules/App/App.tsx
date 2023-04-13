@@ -1,6 +1,6 @@
 import './App.css';
 
-import { useEffect, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Toaster } from 'react-hot-toast';
 
 import ErrorBoundary from '~/components/ErrorBoundary';
@@ -11,35 +11,23 @@ import RankedWords from '~/modules/RankedWords';
 import WordEntryField from '~/modules/WordEntryField';
 import WordFilterRules from '~/modules/WordFilterRules';
 
-import { filterOnExcludedLetters, filterWords } from './App.utils';
+import {
+  filterIncludedLetters,
+  filterRemovedLetters,
+  filterWords,
+} from './App.utils';
 
 const App = () => {
   const [words, setWords] = useState<string[]>([]);
   const [letters, setLetters] = useState<Letters>({});
   const [excludedLetters, setExcludedLetters] = useState<string[]>([]);
   const [filterRules, setFilterRules] = useState<string[]>([]);
-  const [filteredWords, setFilteredWords] = useState<string[]>([]);
 
-  useEffect(() => {
-    if (words.length === 0) {
-      return setFilteredWords([]);
-    }
-
-    const updateFilteredWords = async () => {
-      const filteredOnExcludedLetters =
-        excludedLetters.length > 0
-          ? await filterOnExcludedLetters(words, excludedLetters)
-          : words;
-
-      const w =
-        filterRules.length > 0
-          ? await filterWords(filteredOnExcludedLetters, filterRules)
-          : filteredOnExcludedLetters;
-
-      setFilteredWords(w);
-    };
-
-    updateFilteredWords();
+  const filteredWords = useMemo(() => {
+    return filterWords([
+      filterIncludedLetters(filterRules),
+      filterRemovedLetters(excludedLetters),
+    ])(words);
   }, [excludedLetters, filterRules, words]);
 
   return (
