@@ -33,34 +33,24 @@ export default function WordLists({ onWordsUpdate }: Props) {
   };
   return (
     <div className="mb-5 flex flex-col">
-      <Text className="mb-2 text-slate-300">
-        Select a words list to start (Optional):
-      </Text>
+      <Text className="mb-2 text-slate-300">Add a word list (Optional):</Text>
       <div className="flex">
         <Button onClick={handleSelectList('words496')} variant="primary">
-          Add
-          <br />
           496
           <br />
           words
         </Button>
         <Button onClick={handleSelectList('words1860')} variant="primary">
-          Add
-          <br />
           1860
           <br />
           words
         </Button>
         <Button onClick={handleSelectList('words2508')} variant="primary">
-          Add
-          <br />
           2508
           <br />
           words
         </Button>
         <Button onClick={handleSelectList('words12481')} variant="primary">
-          Add
-          <br />
           12481
           <br />
           words
