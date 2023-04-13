@@ -6,7 +6,7 @@ import { Toaster } from 'react-hot-toast';
 import ErrorBoundary from '~/components/ErrorBoundary';
 import Header from '~/components/Heading';
 import ExcludeLetters from '~/modules/ExcludeLetters';
-import { LetterCount, type Letters } from '~/modules/LetterCount';
+import { LetterCount } from '~/modules/LetterCount';
 import RankedWords from '~/modules/RankedWords';
 import WordEntryField from '~/modules/WordEntryField';
 import WordFilterRules from '~/modules/WordFilterRules';
@@ -15,6 +15,7 @@ import {
   filterIncludedLetters,
   filterRemovedLetters,
   filterWords,
+  Letters,
 } from './App.utils';
 
 const App = () => {
@@ -39,14 +40,14 @@ const App = () => {
         <div className="mt-5">
           <Header className="mb-10 px-10">Wordle Assist</Header>
           <div className="flex w-screen flex-col px-10 md:flex-row">
-            <div className="mr-5 flex flex-col">
+            <div className="mr-5 mb-10 flex flex-col">
               <Header className="mb-10">Words:</Header>
               <WordEntryField
                 onWordsUpdate={setWords}
-                className="mb-10 flex flex-1 flex-col"
+                className="flex flex-1 flex-col"
               />
             </div>
-            <div className="mr-10 flex flex-1 flex-col">
+            <div className="mr-10 mb-10 flex flex-1 flex-col">
               <Header className="mb-10">Filters:</Header>
               <ExcludeLetters
                 className="mb-10"
@@ -54,7 +55,7 @@ const App = () => {
               />
               <WordFilterRules
                 onSetFilters={setFilterRules}
-                className="flex flex-1 flex-col"
+                className=" flex flex-1 flex-col"
               />
             </div>
             <div className="mr-10 flex flex-1 flex-col">
@@ -63,11 +64,13 @@ const App = () => {
                 <LetterCount
                   words={filteredWords}
                   onLettersUpdate={setLetters}
+                  isVisible={filteredWords.length > 0}
                 />
                 <RankedWords
                   letters={letters}
                   words={filteredWords}
                   className="mt-10 flex-1 md:mt-0"
+                  isVisible={filteredWords.length > 0}
                 />
               </div>
             </div>

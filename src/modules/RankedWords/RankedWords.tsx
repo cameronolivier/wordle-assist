@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import Header from '~/components/Heading';
 import { type Maybe } from '~/types';
 
-import { type Letters } from '../LetterCount';
+import { Letters } from '../App/App.utils';
 
 interface WordCount {
   count: number;
@@ -14,8 +14,14 @@ interface Props {
   letters: Letters;
   words: Maybe<string[]>;
   className?: string;
+  isVisible?: boolean;
 }
-const RankedWords = ({ letters, words, className }: Props) => {
+const RankedWords = ({
+  letters,
+  words,
+  className,
+  isVisible = false,
+}: Props) => {
   const [wordCounts, setWordCounts] = useState<WordCounts>({});
 
   useEffect(() => {
@@ -42,21 +48,25 @@ const RankedWords = ({ letters, words, className }: Props) => {
   }, [letters, words]);
 
   return (
-    <div className={className}>
-      <Header className="text-left text-3xl">Results:</Header>
-      <div className="text-left">
-        {Object.keys(wordCounts).length > 0 &&
-          Object.entries(wordCounts)
-            .sort((a, b) => b[1].count - a[1].count)
-            .map((entry) => (
-              <div key={entry[0]}>
-                <pre className="text-slate-300">
-                  {entry[0]}: {entry[1].count}
-                </pre>
-              </div>
-            ))}
+    <>
+      <div className={className}>
+        <Header className="text-left text-3xl">Ranked Words:</Header>
+        {isVisible && (
+          <div className="text-left">
+            {Object.keys(wordCounts).length > 0 &&
+              Object.entries(wordCounts)
+                .sort((a, b) => b[1].count - a[1].count)
+                .map((entry) => (
+                  <div key={entry[0]}>
+                    <pre className="text-slate-300">
+                      {entry[0]}: {entry[1].count}
+                    </pre>
+                  </div>
+                ))}
+          </div>
+        )}
       </div>
-    </div>
+    </>
   );
 };
 
