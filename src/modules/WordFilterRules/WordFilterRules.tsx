@@ -36,11 +36,11 @@ const WordFilterRules = ({ onSetFilters, className }: Props) => {
         className="mb-2 h-48 bg-slate-800 p-4 text-slate-200"
       />
       <div className="flex">
-        <Button variant="primary" onClick={handleRules}>
-          Recalculate
-        </Button>
         <Button variant="secondary" onClick={handleReset}>
           Clear
+        </Button>
+        <Button variant="primary" onClick={handleRules}>
+          Update filters
         </Button>
       </div>
       <Text className="my-2 italic text-stone-400">

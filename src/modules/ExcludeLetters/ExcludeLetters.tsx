@@ -36,11 +36,11 @@ export default function ExcludeLetters({ onRemoveLetters, className }: Props) {
         className="mb-2 w-full bg-slate-800 p-4 text-slate-200"
       />
       <div className="flex">
-        <Button variant="primary" onClick={handleFilterOutLetters}>
-          Recalculate
-        </Button>
         <Button variant="secondary" onClick={handleReset}>
           Clear
+        </Button>
+        <Button variant="primary" onClick={handleFilterOutLetters}>
+          Update filters
         </Button>
       </div>
       <Text className="my-2 italic text-stone-400">

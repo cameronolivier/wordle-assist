@@ -54,11 +54,11 @@ const WordEntryField = ({ onWordsUpdate, className }: Props) => {
         className="mb-2 bg-slate-800 p-4 text-slate-200"
       />
       <div className="flex">
-        <Button onClick={handleWords} variant="primary">
-          Add
-        </Button>
         <Button variant="secondary" onClick={handleReset}>
           Clear
+        </Button>
+        <Button onClick={handleWords} variant="primary">
+          Set word list
         </Button>
       </div>
       <Text className="my-2 italic text-stone-400">
