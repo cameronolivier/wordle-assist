@@ -50,8 +50,8 @@ const WordEntryField = ({ onWordsUpdate, className }: Props) => {
       <Header size="h3">Add your list of 5 letter words to query:</Header>
       <textarea
         ref={wordsRef}
-        rows={15}
-        className="bg-slate-800 p-4 text-slate-200"
+        rows={5}
+        className="h-40 bg-slate-800 p-4 text-slate-200"
       />
       <div className="mt-4 flex">
         <Button variant="secondary" onClick={handleReset}>

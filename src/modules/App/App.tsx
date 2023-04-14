@@ -45,14 +45,14 @@ const App = () => {
           </Header>
           <div className="flex w-screen flex-col px-10 md:flex-row">
             <div className="mr-5 mb-10 flex flex-col">
-              <Header className="mb-10">Words:</Header>
+              <Header className="mb-5">Words:</Header>
               <WordEntryField
                 onWordsUpdate={setWords}
                 className="flex flex-1 flex-col"
               />
             </div>
             <div className="mr-10 mb-10 flex flex-1 flex-col">
-              <Header className="mb-10">Filters:</Header>
+              <Header className="mb-5">Filters:</Header>
               <ExcludeLetters
                 className="mb-10"
                 onRemoveLetters={setExcludedLetters}
@@ -63,8 +63,8 @@ const App = () => {
               />
             </div>
             <div className="mr-10 flex flex-1 flex-col">
-              <Header className="mb-10">Results:</Header>
-              <div className="flex flex-1 flex-col md:flex-row">
+              <Header className="mb-5">Results:</Header>
+              <div className="flex flex-1 flex-row">
                 <LetterCount
                   words={filteredWords}
                   onLettersUpdate={setLetters}
