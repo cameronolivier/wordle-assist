@@ -25,7 +25,7 @@ export const LetterCount = ({
   return (
     <>
       <div className="flex-1">
-        <Header className="text-left text-3xl">Letter Counts:</Header>
+        <Header size="h3">Letter Counts:</Header>
         {isVisible && (
           <div>
             {Object.keys(letters).length > 0 &&

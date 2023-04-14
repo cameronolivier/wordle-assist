@@ -38,7 +38,9 @@ export const filterRemovedLetters =
     if (letters.length === 0 || words.length === 0) return words;
 
     return words.filter((word) =>
-      letters.every((letter) => !word.includes(letter))
+      letters.every(
+        (letter) => !word.toLowerCase().includes(letter.toLowerCase())
+      )
     );
   };
 

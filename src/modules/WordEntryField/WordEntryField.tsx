@@ -3,6 +3,8 @@ import { useRef } from 'react';
 import Button from '~/components/Button';
 import Text from '~/components/Text';
 
+import Header from '../../components/Heading';
+
 import UnformattedWords from './UnformattedWords';
 import WordLists from './Wordlists';
 
@@ -45,15 +47,13 @@ const WordEntryField = ({ onWordsUpdate, className }: Props) => {
     <div className={className}>
       <UnformattedWords onWordsUpdate={handleWordsFieldUpdate} />
       <WordLists onWordsUpdate={handleWordsFieldUpdate} />
-      <Text className="text-slate-300">
-        Add your list of 5 letter words to query:
-      </Text>
+      <Header size="h3">Add your list of 5 letter words to query:</Header>
       <textarea
         ref={wordsRef}
         rows={15}
-        className="mb-2 bg-slate-800 p-4 text-slate-200"
+        className="bg-slate-800 p-4 text-slate-200"
       />
-      <div className="flex">
+      <div className="mt-4 flex">
         <Button variant="secondary" onClick={handleReset}>
           Clear
         </Button>

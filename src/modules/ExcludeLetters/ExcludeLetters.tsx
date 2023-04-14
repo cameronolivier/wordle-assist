@@ -3,6 +3,8 @@ import { useRef } from 'react';
 import Button from '~/components/Button';
 import Text from '~/components/Text';
 
+import Header from '../../components/Heading';
+
 type Props = {
   onRemoveLetters: (words: string[]) => void;
   className?: string;
@@ -27,15 +29,15 @@ export default function ExcludeLetters({ onRemoveLetters, className }: Props) {
 
   return (
     <div className={className}>
-      <Text className="text-slate-300">Excluded letters:</Text>
+      <Header size="h3">Excluded letters:</Header>
       <Text className="text-sm italic text-stone-400">
         These are the greyed out letters in the Wordle results.
       </Text>
       <input
         ref={excludeLettersRef}
-        className="mb-2 w-full bg-slate-800 p-4 text-slate-200"
+        className="w-full bg-slate-800 p-4 text-slate-200"
       />
-      <div className="flex">
+      <div className="mt-4 flex">
         <Button variant="secondary" onClick={handleReset}>
           Clear
         </Button>

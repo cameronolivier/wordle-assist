@@ -50,7 +50,9 @@ const RankedWords = ({
   return (
     <>
       <div className={className}>
-        <Header className="text-left text-3xl">Ranked Words:</Header>
+        <Header size="h3" className="text-left">
+          Ranked Words:
+        </Header>
         {isVisible && (
           <div className="text-left">
             {Object.keys(wordCounts).length > 0 &&

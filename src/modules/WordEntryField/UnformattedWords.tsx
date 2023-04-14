@@ -3,6 +3,8 @@ import { useRef } from 'react';
 import Button from '~/components/Button';
 import Text from '~/components/Text';
 
+import Header from '../../components/Heading';
+
 type Props = {
   isVisible?: boolean;
   onWordsUpdate: (words: string) => void;
@@ -32,10 +34,9 @@ export default function UnformattedWords({
     <>
       {isVisible && (
         <div className="mb-5 flex flex-col">
-          <Text className="text-slate-300">
-            0: Enter to convert a flat string into enter-delimited list
-            (Optional):
-          </Text>
+          <Header size="h4" className="text-slate-300">
+            Enter to convert a flat string into enter-delimited list (Optional):
+          </Header>
           <input
             ref={unstyledRef}
             className="mb-2 w-full bg-slate-800 p-4 text-slate-200"
