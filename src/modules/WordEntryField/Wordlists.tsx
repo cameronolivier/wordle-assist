@@ -5,7 +5,6 @@ import { words as words12481 } from '~/data/words_12481';
 
 import Button from '../../components/Button';
 import Header from '../../components/Heading';
-import Text from '../../components/Text';
 
 const wordLists = {
   words496,
@@ -17,51 +16,31 @@ const wordLists = {
 type WordList = keyof typeof wordLists;
 
 type Props = {
-  onWordsUpdate: (words: string) => void;
+  onWordsUpdate: (words: string[]) => void;
 };
 export default function WordLists({ onWordsUpdate }: Props) {
   const handleSelectList = (list: WordList) => async () => {
-    const handleLongLists = new Promise<string>((resolve, reject) => {
-      try {
-        const longList = wordLists[list].join('\n');
-        resolve(longList);
-      } catch (error) {
-        reject(error);
-      }
-    });
-    const words = await handleLongLists;
-    onWordsUpdate(words);
+    onWordsUpdate(wordLists[list]);
   };
   return (
     <div className="mb-5 flex flex-col">
       <Header size="h4" className="mb-2">
-        Add a word list (Optional):
+        Add a word list:
       </Header>
       <div className="flex">
-        <Button onClick={handleSelectList('words496')} variant="primary">
-          496
-          <br />
-          words
-        </Button>
-        <Button onClick={handleSelectList('words1860')} variant="primary">
-          1860
-          <br />
-          words
-        </Button>
-        <Button onClick={handleSelectList('words2508')} variant="primary">
-          2508
-          <br />
-          words
-        </Button>
         <Button onClick={handleSelectList('words12481')} variant="primary">
-          12481
-          <br />
-          words
+          12k
+        </Button>
+        <Button onClick={handleSelectList('words2508')} variant="secondary">
+          2508
+        </Button>
+        <Button onClick={handleSelectList('words1860')} variant="secondary">
+          1860
+        </Button>
+        <Button onClick={handleSelectList('words496')} variant="secondary">
+          496
         </Button>
       </div>
-      <Text className="my-2 italic text-stone-400">
-        Alternatively, you can enter your own list of words.
-      </Text>
     </div>
   );
 }

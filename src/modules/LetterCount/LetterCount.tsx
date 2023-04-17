@@ -24,9 +24,9 @@ export const LetterCount = ({
 
   return (
     <>
-      <div className="flex-1">
-        <Header size="h3">Letter Counts:</Header>
-        {isVisible && (
+      {isVisible && (
+        <div className="flex-1">
+          <Header size="h3">Letter Counts:</Header>
           <div>
             {Object.keys(letters).length > 0 &&
               Object.entries(letters).map((entry) => (
@@ -35,8 +35,8 @@ export const LetterCount = ({
                 </pre>
               ))}
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </>
   );
 };

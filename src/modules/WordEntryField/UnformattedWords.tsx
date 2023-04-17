@@ -1,9 +1,7 @@
 import { useRef } from 'react';
 
 import Button from '~/components/Button';
-import Text from '~/components/Text';
-
-import Header from '../../components/Heading';
+import Header from '~/components/Heading';
 
 type Props = {
   isVisible?: boolean;

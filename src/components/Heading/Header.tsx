@@ -13,10 +13,10 @@ export default function Header({ children, size = 'h2', className }: Props) {
       className={tw(
         'text-slate-100',
         [
-          size === 'h4' && 'text-xl',
+          size === 'h1' && 'text-4xl',
+          size === 'h2' && 'text-3xl',
           size === 'h3' && 'text-2xl',
-          size === 'h2' && 'text-4xl',
-          size === 'h1' && 'text-6xl',
+          size === 'h4' && 'text-xl',
         ],
         [
           size === 'h4' && 'mb-2',

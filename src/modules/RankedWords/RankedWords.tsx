@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import Header from '~/components/Heading';
 import { type Maybe } from '~/types';
 
 import { Letters } from '../App/App.utils';
@@ -15,11 +14,14 @@ interface Props {
   words: Maybe<string[]>;
   className?: string;
   isVisible?: boolean;
+  onWordSelect: (word: string) => void;
 }
 const RankedWords = ({
   letters,
   words,
   className,
+  onWordSelect,
+
   isVisible = false,
 }: Props) => {
   const [wordCounts, setWordCounts] = useState<WordCounts>({});
@@ -47,23 +49,29 @@ const RankedWords = ({
     }
   }, [letters, words]);
 
+  const handleWordSelect = (word: string) => () => {
+    onWordSelect(word);
+  };
+
   return (
     <>
       <div className={className}>
-        <Header size="h3" className="text-left">
-          Ranked Words:
-        </Header>
         {isVisible && (
-          <div className="text-left">
+          <div className="flex flex-wrap justify-between text-left">
             {Object.keys(wordCounts).length > 0 &&
               Object.entries(wordCounts)
                 .sort((a, b) => b[1].count - a[1].count)
+                .slice(0, 10)
                 .map((entry) => (
-                  <div key={entry[0]}>
-                    <pre className="text-slate-300">
+                  <button
+                    key={entry[0]}
+                    onClick={handleWordSelect(entry[0])}
+                    className="m-2 rounded-md bg-slate-800 p-2"
+                  >
+                    <pre className="text-sm text-slate-300">
                       {entry[0]}: {entry[1].count}
                     </pre>
-                  </div>
+                  </button>
                 ))}
           </div>
         )}

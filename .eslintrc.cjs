@@ -27,6 +27,7 @@ module.exports = {
   plugins: ['tailwindcss'],
   rules: {
     '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+    '@typescript-eslint/ban-ts-comment': ['warn', { 'ts-ignore': 'allow-with-description' }],
   },
   settings: {
     react: {
