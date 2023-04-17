@@ -24,8 +24,8 @@ export default function WordLists({ onWordsUpdate }: Props) {
   };
   return (
     <div className="mb-5 flex flex-col">
-      <Header size="h4" className="mb-2">
-        Add a word list:
+      <Header size="h3" className="mb-2 text-slate-400">
+        Select a word list:
       </Header>
       <div className="flex">
         <Button onClick={handleSelectList('words12481')} variant="primary">

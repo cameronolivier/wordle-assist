@@ -34,7 +34,7 @@ const FeedbackLetter = ({ letter, onSetState }: FeedbackLetterProps) => {
     <button
       onClick={handleClick}
       className={tw(
-        'm-2 h-10 w-12 justify-center border border-solid border-slate-600 p-2 text-center',
+        'm-2 h-10 w-12 justify-center rounded border border-solid border-slate-600 p-2 text-center',
         bgColorMap[state]
       )}
     >
@@ -59,7 +59,7 @@ const FeedbackWord = ({ word, updateWord }: FeedbackWordProps) => {
   };
 
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-row justify-around">
       {word.letters.map((letter) => {
         return (
           <FeedbackLetter
@@ -135,7 +135,7 @@ const FeedbackFilters = ({ words, onFiltersUpdate }: Props) => {
   return (
     <>
       {wordMatrix.length > 0 && (
-        <div className="mb-10 w-full rounded border border-solid border-slate-700 p-4">
+        <div className="w-full bg-slate-800 p-4">
           {wordMatrix.map((word) => {
             return (
               <FeedbackWord

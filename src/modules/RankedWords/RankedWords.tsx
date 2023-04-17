@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { type Maybe } from '~/types';
 
-import { Letters } from '../App/App.utils';
+import { Letters } from '../LetterCount/LetterCount.utils';
 
 interface WordCount {
   count: number;

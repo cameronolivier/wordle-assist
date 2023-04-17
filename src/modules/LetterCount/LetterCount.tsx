@@ -2,7 +2,7 @@ import { useEffect, useMemo } from 'react';
 
 import Header from '~/components/Heading';
 
-import { countLetters, Letters } from '../App/App.utils';
+import { countLetters, Letters } from './LetterCount.utils';
 
 interface Props {
   words: string[];

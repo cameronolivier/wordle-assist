@@ -1,9 +1,8 @@
 import { useRef } from 'react';
 
 import Button from '~/components/Button';
+import Header from '~/components/Heading';
 import Text from '~/components/Text';
-
-import Header from '../../components/Heading';
 
 interface Props {
   onSetFilters: (rules: string[]) => void;

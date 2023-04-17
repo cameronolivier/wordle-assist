@@ -1,7 +1,7 @@
 import { describe } from 'vitest';
 
-import { filterFn } from './App.utils';
-import * as SUT from './App.utils';
+import { FilterFn } from './WordFilterRules.utils';
+import * as SUT from './WordFilterRules.utils';
 
 describe('WordFilterRules.utils', () => {
   describe('filterWordOnLetterRules', () => {
@@ -129,7 +129,7 @@ describe('WordFilterRules.utils', () => {
       // given ... a list of words
       const wordsMock = ['abysm', 'chasm', 'fleet', 'clerk'];
       // and ... a list of rules
-      const rulesMock: filterFn[] = [];
+      const rulesMock: FilterFn[] = [];
       // when ... we filter out the words based on the provided rules
       const result = SUT.filterWords(rulesMock)(wordsMock);
       // then ... we should get back the original list
@@ -139,7 +139,7 @@ describe('WordFilterRules.utils', () => {
       // given ... a list of words
       const wordsMock = ['abysm', 'chasm', 'chafe', 'clerk'];
       // and ... a list of rules
-      const rulesMock: filterFn[] = [
+      const rulesMock: FilterFn[] = [
         SUT.filterIncludedLetters(['a3+']),
         SUT.filterRemovedLetters(['e']),
       ];

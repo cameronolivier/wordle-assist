@@ -7,14 +7,13 @@ import ErrorBoundary from '~/components/ErrorBoundary';
 import Header from '~/components/Heading';
 import { LetterCount } from '~/modules/LetterCount';
 import RankedWords from '~/modules/RankedWords';
-import WordEntryField from '~/modules/WordEntryField';
 
 import Text from '../../components/Text';
 import FeedbackFilters from '../FeedbackFilters';
 import { Filter } from '../FeedbackFilters/FeedbackFilters';
+import { filterAll } from '../FeedbackFilters/FeedbackFilters.utils';
+import { Letters } from '../LetterCount/LetterCount.utils';
 import WordLists from '../WordEntryField/Wordlists';
-
-import { filterAll, Letters } from './App.utils';
 
 const App = () => {
   const [words, setWords] = useState<string[]>([]);
@@ -35,48 +34,50 @@ const App = () => {
   }, [filters, words]);
 
   return (
-    <div className="flex min-h-screen content-center justify-center bg-slate-900">
+    <div className="flex min-h-screen flex-col items-center justify-start bg-slate-900">
       <Toaster position="bottom-center" />
       <ErrorBoundary
         fallback={<Header className="mt-20">Something went wrong.</Header>}
       >
-        <div className="mt-5">
-          <Header size="h1" className="mb-10 px-10">
-            Wordle Assist
-          </Header>
-          <div className="flex w-screen flex-col px-10 md:flex-row">
-            <div className="mr-5 mb-10 flex flex-col">
-              <Header className="mb-5">Words:</Header>
-              <WordLists onWordsUpdate={setWords} />
-              <WordEntryField
-                onWordsUpdate={setWords}
-                className="flex flex-1 flex-col"
-              />
-              <div className="mb-10 flex flex-row justify-between">
-                <Text>Words: {words.length}</Text>
-                <Text>Filtered: {filteredWords.length}</Text>
-              </div>
-              <Header className="mb-5">Filters:</Header>
-              <FeedbackFilters
-                words={selectedWords}
-                onFiltersUpdate={onFiltersUpdate}
-              />
-            </div>
-            <div className="mr-10 flex flex-1 flex-col">
-              <Header className="mb-0">Results:</Header>
-              <div className="flex flex-1 flex-row">
-                <RankedWords
-                  letters={letters}
-                  words={filteredWords}
-                  onWordSelect={addSelectedWord}
-                  className="mt-2 flex-1 md:mt-0"
-                  isVisible={filteredWords.length > 0}
+        <div className="flex min-h-screen w-screen flex-col items-center justify-start">
+          <div className="mt-5 md:w-1/3">
+            <Header size="h2" className="mb-6 px-10 text-center text-slate-400">
+              Wordle Assist
+            </Header>
+            <div className="flex flex-col px-10">
+              <div className="mb-2 flex flex-col">
+                <div className="border-b-4 border-b-slate-800 pb-4">
+                  <WordLists onWordsUpdate={setWords} />
+                  <div className="flex flex-row justify-between">
+                    <Text className="text-slate-400">
+                      Words: {words.length}
+                    </Text>
+                    <Text className="text-slate-400">
+                      Filtered: {filteredWords.length}
+                    </Text>
+                  </div>
+                </div>
+                <FeedbackFilters
+                  words={selectedWords}
+                  onFiltersUpdate={onFiltersUpdate}
                 />
-                <LetterCount
-                  words={filteredWords}
-                  onLettersUpdate={setLetters}
-                  isVisible={false}
-                />
+                <Header size="h3" className="mb-0 mt-6 text-slate-400">
+                  Results:
+                </Header>
+                <div className="flex flex-1 flex-row">
+                  <RankedWords
+                    letters={letters}
+                    words={filteredWords}
+                    onWordSelect={addSelectedWord}
+                    className="mt-2 flex-1 md:mt-0"
+                    isVisible={filteredWords.length > 0}
+                  />
+                  <LetterCount
+                    words={filteredWords}
+                    onLettersUpdate={setLetters}
+                    isVisible={false}
+                  />
+                </div>
               </div>
             </div>
           </div>
