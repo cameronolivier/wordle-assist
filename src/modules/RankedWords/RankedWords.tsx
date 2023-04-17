@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { type Maybe } from '~/types';
 
+import Typography from '../../components/Typography';
 import { Letters } from '../LetterCount/LetterCount.utils';
 
 interface WordCount {
@@ -21,8 +22,7 @@ const RankedWords = ({
   words,
   className,
   onWordSelect,
-
-  isVisible = false,
+  isVisible = true,
 }: Props) => {
   const [wordCounts, setWordCounts] = useState<WordCounts>({});
 
@@ -57,7 +57,7 @@ const RankedWords = ({
     <>
       <div className={className}>
         {isVisible && (
-          <div className="flex flex-wrap justify-between text-left">
+          <div className="mt-4 flex flex-wrap justify-between text-left">
             {Object.keys(wordCounts).length > 0 &&
               Object.entries(wordCounts)
                 .sort((a, b) => b[1].count - a[1].count)
@@ -74,6 +74,11 @@ const RankedWords = ({
                   </button>
                 ))}
           </div>
+        )}
+        {words && words.length === 0 && (
+          <Typography className="text-slate-500">
+            No applicable words. Updating filters should provide more choices.
+          </Typography>
         )}
       </div>
     </>

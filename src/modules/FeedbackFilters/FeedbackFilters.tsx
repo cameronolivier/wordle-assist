@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
-import Text from '../../components/Text';
+import Header from '../../components/Heading';
+import Typography from '../../components/Typography';
 import { tw } from '../../utils/tailwind.utils';
 
 const bgColorMap = ['bg-slate-600', 'bg-yellow-400', 'bg-green-400'];
@@ -38,7 +39,9 @@ const FeedbackLetter = ({ letter, onSetState }: FeedbackLetterProps) => {
         bgColorMap[state]
       )}
     >
-      <Text className={textColorMap[state]}>{letter.value.toUpperCase()}</Text>
+      <Typography className={textColorMap[state]}>
+        {letter.value.toUpperCase()}
+      </Typography>
     </button>
   );
 };
@@ -136,6 +139,9 @@ const FeedbackFilters = ({ words, onFiltersUpdate }: Props) => {
     <>
       {wordMatrix.length > 0 && (
         <div className="w-full bg-slate-800 p-4">
+          <Header size="h4" className="mb-2 text-center text-slate-500">
+            Replicate the wordle result to filter:
+          </Header>
           {wordMatrix.map((word) => {
             return (
               <FeedbackWord

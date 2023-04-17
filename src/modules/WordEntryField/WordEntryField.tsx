@@ -2,7 +2,7 @@ import { useRef } from 'react';
 
 import Button from '~/components/Button';
 import Header from '~/components/Heading';
-import Text from '~/components/Text';
+import Typography from '~/components/Typography';
 
 import UnformattedWords from './UnformattedWords';
 
@@ -68,12 +68,12 @@ const WordEntryField = ({
               Set word list
             </Button>
           </div>
-          <Text className="my-2 italic text-stone-400">
+          <Typography className="my-2 italic text-stone-400">
             Each word should be on a new line.
             <br />
             For strings longer than 5 characters, only the first 5 characters
             will be tallied.
-          </Text>
+          </Typography>
         </div>
       )}
     </>

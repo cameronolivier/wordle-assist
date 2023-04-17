@@ -1,10 +1,10 @@
-import Text from '../../components/Text';
+import Typography from '../../components/Typography';
 
 export default function HowItWorks() {
   return (
     <div className="my-5 px-10">
-      <Text className="text-2xl text-slate-300">How it works:</Text>
-      <Text className="text-slate-300">
+      <Typography className="text-2xl text-slate-300">How it works:</Typography>
+      <Typography className="text-slate-300">
         1. Enter a list of words and press &quot;Add&quot;. This will be the
         dictionary of words that the app will query and provide results from.
         Feel free to use one of our supplied dictionaries or add your own.
@@ -25,7 +25,7 @@ export default function HowItWorks() {
         <br />
         6. Repeat steps 3-5 until you have won Wordle for today (or run out of
         turns).
-      </Text>
+      </Typography>
     </div>
   );
 }

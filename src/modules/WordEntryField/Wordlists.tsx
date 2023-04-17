@@ -6,7 +6,7 @@ import { words as words12481 } from '~/data/words_12481';
 import Button from '../../components/Button';
 import Header from '../../components/Heading';
 
-const wordLists = {
+export const wordLists = {
   words496,
   words1860,
   words2508,
@@ -23,13 +23,13 @@ export default function WordLists({ onWordsUpdate }: Props) {
     onWordsUpdate(wordLists[list]);
   };
   return (
-    <div className="mb-5 flex flex-col">
-      <Header size="h3" className="mb-2 text-slate-400">
-        Select a word list:
+    <div className="mt-10 flex flex-col">
+      <Header size="h4" className="mb-2 text-center text-slate-600">
+        Choose another word list:
       </Header>
       <div className="flex">
-        <Button onClick={handleSelectList('words12481')} variant="primary">
-          12k
+        <Button onClick={handleSelectList('words12481')} variant="secondary">
+          Default (12k)
         </Button>
         <Button onClick={handleSelectList('words2508')} variant="secondary">
           2508

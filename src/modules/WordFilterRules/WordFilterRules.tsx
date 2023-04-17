@@ -2,7 +2,7 @@ import { useRef } from 'react';
 
 import Button from '~/components/Button';
 import Header from '~/components/Heading';
-import Text from '~/components/Text';
+import Typography from '~/components/Typography';
 
 interface Props {
   onSetFilters: (rules: string[]) => void;
@@ -55,9 +55,9 @@ const WordFilterRules = ({ onSetFilters, className }: Props) => {
   return (
     <div className={className}>
       <Header size="h3">Included letters:</Header>
-      <Text className="text-sm italic text-stone-400">
+      <Typography className="text-sm italic text-stone-400">
         These are the green and yellow letters in the Wordle results.
-      </Text>
+      </Typography>
       <textarea
         ref={wordFilterRef}
         rows={20}
@@ -109,7 +109,7 @@ const WordFilterRules = ({ onSetFilters, className }: Props) => {
           Update filters
         </Button>
       </div>
-      <Text className="my-2 italic text-stone-400">
+      <Typography className="my-2 italic text-stone-400">
         Each rule should be on a new line.
         <br />
         <strong>Format:</strong> [Letter][Position][+/-]
@@ -118,7 +118,7 @@ const WordFilterRules = ({ onSetFilters, className }: Props) => {
         <br />
         If the letter A in the first spot is yellow, then enter: A1- <br />
         If the letter A in the first spot is green, then enter: A1+
-      </Text>
+      </Typography>
     </div>
   );
 };
