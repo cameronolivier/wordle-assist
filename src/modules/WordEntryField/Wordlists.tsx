@@ -28,8 +28,8 @@ export default function WordLists({ onWordsUpdate }: Props) {
         Choose another word list:
       </Header>
       <div className="flex">
-        <Button onClick={handleSelectList('words12481')} variant="secondary">
-          Default (12k)
+        <Button onClick={handleSelectList('words12481')} variant="primary">
+          12K
         </Button>
         <Button onClick={handleSelectList('words2508')} variant="secondary">
           2508

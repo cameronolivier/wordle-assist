@@ -53,7 +53,7 @@ const App = () => {
                     </Typography>
                   </div>
                   <Header size="h3" className="mt-6 mb-1 text-slate-400">
-                    Select your Wordle picks:
+                    Suggested Words:
                   </Header>
                   <div className="flex flex-1 flex-row">
                     <RankedWords
@@ -68,7 +68,6 @@ const App = () => {
                     onFiltersUpdate={onFiltersUpdate}
                   />
                 </div>
-
                 <WordLists onWordsUpdate={setWords} />
               </div>
             </div>

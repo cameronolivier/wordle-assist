@@ -8,18 +8,22 @@ const rankWords = (letters: Letters, words: string[]) => {
   const wordCounts: WordCounts = {};
   words.forEach((word) => {
     wordCounts[word.slice(0, 5)] = {
-      count: word
-        .slice(0, 5)
-        .split('')
-        .map((letter, index) => {
-          if (index > word.indexOf(letter)) {
-            return `${letter}${letter}`;
-          }
-          return letter;
-        })
-        .reduce((count, char): number => {
-          return letters[char] + count;
-        }, 0),
+      count: Math.floor(
+        (word
+          .slice(0, 5)
+          .split('')
+          .map((letter, index) => {
+            if (index > word.indexOf(letter)) {
+              return `${letter}${letter}`;
+            }
+            return letter;
+          })
+          .reduce((count, char): number => {
+            return letters[char] + count;
+          }, 0) /
+          words.length) *
+          100
+      ),
     };
   });
   return wordCounts;
@@ -60,7 +64,7 @@ const RankedWords = ({
 
   return (
     <>
-      <div className={tw(className, 'h-44')}>
+      <div className={tw(className, 'h-40')}>
         {isVisible && (
           <div className="mt-4 flex flex-wrap justify-between text-left">
             {Object.keys(wordCounts).length > 0 &&
