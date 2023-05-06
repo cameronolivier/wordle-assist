@@ -5,19 +5,16 @@ import { Toaster } from 'react-hot-toast';
 
 import ErrorBoundary from '~/components/ErrorBoundary';
 import Header from '~/components/Heading';
-import { LetterCount } from '~/modules/LetterCount';
 import RankedWords from '~/modules/RankedWords';
 
 import Typography from '../../components/Typography';
 import FeedbackFilters from '../FeedbackFilters';
 import { Filter } from '../FeedbackFilters/FeedbackFilters';
 import { filterAll } from '../FeedbackFilters/FeedbackFilters.utils';
-import { Letters } from '../LetterCount/LetterCount.utils';
 import WordLists, { wordLists } from '../WordEntryField/Wordlists';
 
 const App = () => {
   const [words, setWords] = useState<string[]>(wordLists.words12481);
-  const [letters, setLetters] = useState<Letters>({});
   const [selectedWords, setSelectedWords] = useState<string[]>([]);
   const [filters, setFilters] = useState<Filter[]>([]);
 
@@ -60,23 +57,18 @@ const App = () => {
                   </Header>
                   <div className="flex flex-1 flex-row">
                     <RankedWords
-                      letters={letters}
                       words={filteredWords}
                       onWordSelect={addSelectedWord}
                       className="mb-2 flex-1 md:mt-0"
                       isVisible={filteredWords.length > 0}
                     />
-                    <LetterCount
-                      words={filteredWords}
-                      onLettersUpdate={setLetters}
-                      isVisible={false}
-                    />
                   </div>
+                  <FeedbackFilters
+                    words={selectedWords}
+                    onFiltersUpdate={onFiltersUpdate}
+                  />
                 </div>
-                <FeedbackFilters
-                  words={selectedWords}
-                  onFiltersUpdate={onFiltersUpdate}
-                />
+
                 <WordLists onWordsUpdate={setWords} />
               </div>
             </div>

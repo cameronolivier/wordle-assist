@@ -138,7 +138,7 @@ const FeedbackFilters = ({ words, onFiltersUpdate }: Props) => {
   return (
     <>
       {wordMatrix.length > 0 && (
-        <div className="w-full bg-slate-800 p-4">
+        <div className="m-2 w-full rounded bg-slate-800 p-4">
           <Header size="h4" className="mb-2 text-center text-slate-500">
             Replicate the wordle result to filter:
           </Header>

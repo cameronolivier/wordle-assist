@@ -1,9 +1,29 @@
-import { useEffect, useState } from 'react';
-
-import { type Maybe } from '~/types';
+import { useEffect, useMemo, useState } from 'react';
 
 import Typography from '../../components/Typography';
-import { Letters } from '../LetterCount/LetterCount.utils';
+import { tw } from '../../utils/tailwind.utils';
+import { countLetters, Letters } from '../LetterCount/LetterCount.utils';
+
+const rankWords = (letters: Letters, words: string[]) => {
+  const wordCounts: WordCounts = {};
+  words.forEach((word) => {
+    wordCounts[word.slice(0, 5)] = {
+      count: word
+        .slice(0, 5)
+        .split('')
+        .map((letter, index) => {
+          if (index > word.indexOf(letter)) {
+            return `${letter}${letter}`;
+          }
+          return letter;
+        })
+        .reduce((count, char): number => {
+          return letters[char] + count;
+        }, 0),
+    };
+  });
+  return wordCounts;
+};
 
 interface WordCount {
   count: number;
@@ -11,40 +31,25 @@ interface WordCount {
 type WordCounts = Record<string, WordCount>;
 
 interface Props {
-  letters: Letters;
-  words: Maybe<string[]>;
+  words: string[];
   className?: string;
   isVisible?: boolean;
   onWordSelect: (word: string) => void;
 }
 const RankedWords = ({
-  letters,
   words,
   className,
   onWordSelect,
   isVisible = true,
 }: Props) => {
   const [wordCounts, setWordCounts] = useState<WordCounts>({});
+  const letters = useMemo(() => {
+    return countLetters(words);
+  }, [words]);
 
   useEffect(() => {
-    if (Object.keys(letters).length > 0 && words != null && words.length > 0) {
-      const _wordCounts: WordCounts = {};
-      words.forEach((word) => {
-        _wordCounts[word.slice(0, 5)] = {
-          count: word
-            .split('')
-            .slice(0, 5)
-            .map((letter, index) => {
-              if (index > word.indexOf(letter)) {
-                return `${letter}${letter}`;
-              }
-              return letter;
-            })
-            .reduce((acc, curr): number => {
-              return letters[curr] + acc;
-            }, 0),
-        };
-      });
+    if (Object.keys(letters).length > 0 && words.length > 0) {
+      const _wordCounts = rankWords(letters, words);
       setWordCounts(_wordCounts);
     }
   }, [letters, words]);
@@ -55,7 +60,7 @@ const RankedWords = ({
 
   return (
     <>
-      <div className={className}>
+      <div className={tw(className, 'h-44')}>
         {isVisible && (
           <div className="mt-4 flex flex-wrap justify-between text-left">
             {Object.keys(wordCounts).length > 0 &&

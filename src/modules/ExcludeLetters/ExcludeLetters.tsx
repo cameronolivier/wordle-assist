@@ -1,9 +1,8 @@
 import { useRef } from 'react';
 
 import Button from '~/components/Button';
+import Header from '~/components/Heading';
 import Typography from '~/components/Typography';
-
-import Header from '../../components/Heading';
 
 type Props = {
   onRemoveLetters: (words: string[]) => void;
