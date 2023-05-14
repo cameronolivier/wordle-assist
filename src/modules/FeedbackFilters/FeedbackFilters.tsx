@@ -122,7 +122,7 @@ const FeedbackFilters = ({ words, onFiltersUpdate }: Props) => {
   };
 
   useEffect(() => {
-    const filters: Filter[] = wordMatrix.flatMap((word) => {
+    const allFilters: Filter[] = wordMatrix.flatMap((word) => {
       return word.letters.map((letter) => {
         return {
           type: filtersTypes[letter.state] || 'exclude',
@@ -131,7 +131,30 @@ const FeedbackFilters = ({ words, onFiltersUpdate }: Props) => {
         };
       });
     });
+    const filters = allFilters;
+
+    console.log({ allFilters });
+
+    const lettersInWithDuplicates = allFilters
+      .filter((filter) => filter.type === 'include' || filter.type === 'place')
+      .map((filter) => {
+        // get all letters that are included or placed
+        return filter.letter;
+      });
+
+    const lettersIn = [...new Set(lettersInWithDuplicates)];
+
+    console.log({ lettersIn });
+
+    const newFilters: Filter[] = allFilters.filter(
+      (filter) =>
+        !(lettersIn.includes(filter.letter) && filter.type === 'exclude')
+    );
+
+    console.log({ newFilters });
+
     console.log({ filters });
+    console.log('==========');
     onFiltersUpdate(filters);
   }, [onFiltersUpdate, wordMatrix]);
 

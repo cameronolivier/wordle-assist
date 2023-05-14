@@ -42,6 +42,13 @@ export const filterRemovedLetters =
       )
     );
   };
+
+export const removedUsedWords = (usedWords: string[]) => (words: string[]) => {
+  if (usedWords.length === 0 || words.length === 0) return words;
+
+  return words.filter((word) => !usedWords.includes(word));
+};
+
 export type FilterFn = (words: string[]) => string[];
 export const filterWords = (filters: FilterFn[]) => (words: string[]) => {
   if (words.length === 0 || filters.length === 0) {

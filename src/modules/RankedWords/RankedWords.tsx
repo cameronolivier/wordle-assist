@@ -64,7 +64,7 @@ const RankedWords = ({
 
   return (
     <>
-      <div className={tw(className, 'h-40')}>
+      <div className={tw(className, 'h-52')}>
         {isVisible && (
           <div className="mt-4 flex flex-wrap justify-between text-left">
             {Object.keys(wordCounts).length > 0 &&
@@ -75,7 +75,7 @@ const RankedWords = ({
                   <button
                     key={entry[0]}
                     onClick={handleWordSelect(entry[0])}
-                    className="m-2 rounded-md bg-slate-800 p-2"
+                    className="my-1.5 mx-1 rounded-md bg-slate-800 p-2"
                   >
                     <pre className="text-sm text-slate-300">
                       {entry[0]}: {entry[1].count}
