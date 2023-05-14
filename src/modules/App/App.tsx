@@ -52,6 +52,10 @@ const App = () => {
                       Filtered: {filteredWords.length}
                     </Typography>
                   </div>
+                  <FeedbackFilters
+                    words={selectedWords}
+                    onFiltersUpdate={onFiltersUpdate}
+                  />
                   <Header size="h3" className="mt-6 mb-1 text-slate-400">
                     Suggested Words:
                   </Header>
@@ -63,10 +67,6 @@ const App = () => {
                       isVisible={filteredWords.length > 0}
                     />
                   </div>
-                  <FeedbackFilters
-                    words={selectedWords}
-                    onFiltersUpdate={onFiltersUpdate}
-                  />
                 </div>
                 <WordLists onWordsUpdate={setWords} />
               </div>

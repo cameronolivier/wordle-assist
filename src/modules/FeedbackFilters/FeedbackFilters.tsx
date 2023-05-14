@@ -62,7 +62,7 @@ const FeedbackWord = ({ word, updateWord }: FeedbackWordProps) => {
   };
 
   return (
-    <div className="flex flex-row justify-around">
+    <div className="m-0 flex flex-row justify-around">
       {word.letters.map((letter) => {
         return (
           <FeedbackLetter
@@ -131,37 +131,27 @@ const FeedbackFilters = ({ words, onFiltersUpdate }: Props) => {
         };
       });
     });
-    const filters = allFilters;
-
-    console.log({ allFilters });
 
     const lettersInWithDuplicates = allFilters
       .filter((filter) => filter.type === 'include' || filter.type === 'place')
       .map((filter) => {
-        // get all letters that are included or placed
         return filter.letter;
       });
 
     const lettersIn = [...new Set(lettersInWithDuplicates)];
 
-    console.log({ lettersIn });
-
-    const newFilters: Filter[] = allFilters.filter(
+    const filters: Filter[] = allFilters.filter(
       (filter) =>
         !(lettersIn.includes(filter.letter) && filter.type === 'exclude')
     );
 
-    console.log({ newFilters });
-
-    console.log({ filters });
-    console.log('==========');
     onFiltersUpdate(filters);
   }, [onFiltersUpdate, wordMatrix]);
 
   return (
     <>
       {wordMatrix.length > 0 && (
-        <div className="m-2 w-full rounded bg-slate-800 p-4">
+        <div className="m-2 rounded bg-slate-800 p-4">
           <Header size="h4" className="mb-2 text-center text-slate-500">
             Replicate the wordle result to filter:
           </Header>
