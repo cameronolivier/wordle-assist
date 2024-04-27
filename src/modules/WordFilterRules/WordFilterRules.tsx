@@ -63,7 +63,7 @@ const WordFilterRules = ({ onSetFilters, className }: Props) => {
         rows={20}
         className="mb-2 h-48 bg-slate-800 p-4 text-slate-200"
       />
-      <div className="mt-2 mb-4 rounded border border-solid border-slate-600 bg-slate-800 p-4">
+      <div className="mb-4 mt-2 rounded border border-solid border-slate-600 bg-slate-800 p-4">
         <div className="mb-2 flex">
           <Button variant="secondary" onClick={handlePosition(1)}>
             1

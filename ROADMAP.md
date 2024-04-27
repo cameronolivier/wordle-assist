@@ -24,8 +24,8 @@
 
 - [ ] 4: we should repeat the above until the user completes the card.
 
-- [ ] 5: Add a new algorithm that adds the number of times each letter is in that specific position to the count as 
-  an additional tally (do I need to weight this at all?)
+- [ ] 5: Add a new algorithm that adds the number of times each letter is in that specific position to the count as
+      an additional tally (do I need to weight this at all?)
 - [ ] 6: Get data of all previous answers and grey out (or simply remove?) and words already used
--  [ ] 7: remove all plurals (and others? there are other words that aren't really used - like rude words, etc)
-\
+- [ ] 7: remove all plurals (and others? there are other words that aren't really used - like rude words, etc)
+      \

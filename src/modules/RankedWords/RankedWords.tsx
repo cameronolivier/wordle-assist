@@ -77,7 +77,7 @@ const RankedWords = ({
                   <button
                     key={entry[0]}
                     onClick={handleWordSelect(entry[0])}
-                    className="my-1.5 mx-1 rounded-md bg-slate-800 p-2"
+                    className="mx-1 my-1.5 rounded-md bg-slate-800 p-2"
                   >
                     <pre className="text-sm text-slate-300">
                       {entry[0]}: {entry[1].count}
