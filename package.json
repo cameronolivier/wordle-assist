@@ -13,7 +13,8 @@
     "code:fix": "pnpm prettier:fix && pnpm lint:fix",
     "coverage": "vitest run --coverage",
     "test": "vitest",
-    "test:ui": "vitest --ui"
+    "test:ui": "vitest --ui",
+    "update": "pnpx npm-check -u"
   },
   "dependencies": {
     "clsx": "^1.2.1",

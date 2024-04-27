@@ -34,6 +34,8 @@ interface WordCount {
 }
 type WordCounts = Record<string, WordCount>;
 
+const MAX_WORDS_IN_SUGGESTED_LIST = 48;
+
 interface Props {
   words: string[];
   className?: string;
@@ -64,13 +66,13 @@ const RankedWords = ({
 
   return (
     <>
-      <div className={tw(className, 'h-52')}>
+      <div className={tw(className)}>
         {isVisible && (
           <div className="mt-4 flex flex-wrap justify-between text-left">
             {Object.keys(wordCounts).length > 0 &&
               Object.entries(wordCounts)
                 .sort((a, b) => b[1].count - a[1].count)
-                .slice(0, 10)
+                .slice(0, MAX_WORDS_IN_SUGGESTED_LIST)
                 .map((entry) => (
                   <button
                     key={entry[0]}
