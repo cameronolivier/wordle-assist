@@ -2,11 +2,12 @@ export const filterWordOnLetterRules =
   (letterRules: string[]) =>
   (word: string): boolean => {
     if (letterRules.length === 0) return true;
+    
+    const safeWord = word.toLowerCase();
 
     return letterRules.every((rule) => {
       const [char, pos, state] = rule.split('');
       const charIndex = parseInt(pos, 10) - 1;
-      const safeWord = word.toLowerCase();
       const safeChar = char.toLowerCase();
 
       if (!safeWord.includes(safeChar)) {
@@ -31,6 +32,7 @@ export const filterIncludedLetters =
 
     return words.filter(filterWordOnLetterRules(letterRules));
   };
+
 export const filterRemovedLetters =
   (letters: string[]) =>
   (words: string[]): string[] => {
@@ -59,3 +61,4 @@ export const filterWords = (filters: FilterFn[]) => (words: string[]) => {
     words
   );
 };
+

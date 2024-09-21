@@ -12,6 +12,7 @@ import FeedbackFilters from '../FeedbackFilters';
 import { Filter } from '../FeedbackFilters/FeedbackFilters';
 import { filterAll } from '../FeedbackFilters/FeedbackFilters.utils';
 import WordLists, { wordLists } from '../WordEntryField/Wordlists';
+import { sortWordsWithPluralsAtEnd } from './App.utils';
 
 const App = () => {
   const [words, setWords] = useState<string[]>(wordLists.words12481);
@@ -27,7 +28,8 @@ const App = () => {
   }, []);
 
   const filteredWords = useMemo(() => {
-    return filterAll(filters)(words);
+    const wordsOnceFiltered = filterAll(filters)(words);
+    return sortWordsWithPluralsAtEnd(wordsOnceFiltered);
   }, [filters, words]);
 
   return (

@@ -24,6 +24,10 @@ type FeedbackLetterProps = {
   onSetState: (letter: Letter) => void;
 };
 const FeedbackLetter = ({ letter, onSetState }: FeedbackLetterProps) => {
+
+  // here feels like the best place to handle the rules around multiple of the same letters.
+  // just not quite sure how to do it. 
+  
   const { state, value, index } = letter;
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
@@ -137,6 +141,14 @@ const FeedbackFilters = ({ words, onFiltersUpdate }: Props) => {
       .map((filter) => {
         return filter.letter;
       });
+
+      // I _think_ the solution for handling duplicate letters, is to add a count to the letter type that defaults to 1.
+      // Then every time we add a letter, we can hopefully check if there is a letter in the array already, and if there is, we can increment the count.
+      // Then when we get to filtering, we can check the count, and if it's greater than 1, we count the number of times the letter is in the word. 
+      // we will need to also check the rule -  if the count is +1 - then - if it's 'exclude' we exclude any words with 1+ that letter,
+      // if it's include or place we have to make sure the word has +1 count for that letter. 
+      // but I think the current filters should hopefully just _work_ ?
+
 
     const lettersIn = [...new Set(lettersInWithDuplicates)];
 
