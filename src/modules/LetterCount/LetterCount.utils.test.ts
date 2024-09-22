@@ -1,3 +1,5 @@
+import { describe, expect, it } from 'vitest';
+
 import * as SUT from './LetterCount.utils';
 
 describe('LetterCount.utils', () => {

@@ -3,7 +3,6 @@ import { useEffect, useMemo, useState } from 'react';
 import Typography from '../../components/Typography';
 import { tw } from '../../utils/tailwind.utils';
 import { countLetters, Letters } from '../LetterCount/LetterCount.utils';
-import { sortByLikelyPlural } from '../App/App.utils';
 
 const rankWords = (letters: Letters, words: string[]) => {
   const wordCounts: WordCounts = {};
@@ -23,7 +22,7 @@ const rankWords = (letters: Letters, words: string[]) => {
             return letters[char] + count;
           }, 0) /
           words.length) *
-          100
+          100,
       ),
     };
   });

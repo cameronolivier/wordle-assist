@@ -1,4 +1,4 @@
-import { describe } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import { FilterFn } from './WordFilterRules.utils';
 import * as SUT from './WordFilterRules.utils';
@@ -28,7 +28,7 @@ describe('WordFilterRules.utils', () => {
         const result = SUT.filterWordOnLetterRules(rules)(wordMock);
         // then ... we should get back true
         expect(result).toBe(expected);
-      }
+      },
     );
     it.each([
       [['a1+', 'b3+', 'y2-'], false],
@@ -44,7 +44,7 @@ describe('WordFilterRules.utils', () => {
         const result = SUT.filterWordOnLetterRules(rules)(wordMock);
         // then ... we should get back false
         expect(result).toBe(expected);
-      }
+      },
     );
     it('should return false if the word does not contain any of the provided letters', () => {
       // given ... a word
