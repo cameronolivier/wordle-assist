@@ -12,10 +12,15 @@ import FeedbackFilters from '../FeedbackFilters';
 import { Filter } from '../FeedbackFilters/FeedbackFilters';
 import { filterAll } from '../FeedbackFilters/FeedbackFilters.utils';
 import WordLists, { wordLists } from '../WordEntryField/Wordlists';
+
 import { sortWordsWithPluralsAtEnd } from './App.utils';
 
+// WORDLE RULES:
+// - Plural unless they end in ES or S.
+// - No Past tense that ends in ED.
+
 const App = () => {
-  const [words, setWords] = useState<string[]>(wordLists.words12481);
+  const [words, setWords] = useState<string[]>(wordLists.words);
   const [selectedWords, setSelectedWords] = useState<string[]>([]);
   const [filters, setFilters] = useState<Filter[]>([]);
 

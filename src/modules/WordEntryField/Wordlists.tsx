@@ -2,11 +2,13 @@ import { words as words496 } from '~/data/words_496';
 import { words as words1860 } from '~/data/words_1860';
 import { words as words2508 } from '~/data/words_2508';
 import { words as words12481 } from '~/data/words_12481';
+import { words } from '~/data/words.json';
 
 import Button from '../../components/Button';
 import Header from '../../components/Heading';
 
 export const wordLists = {
+  words,
   words496,
   words1860,
   words2508,

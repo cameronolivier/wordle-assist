@@ -1,4 +1,10 @@
 import nltk
+nltk.download('averaged_perceptron_tagger_eng')
+# nltk.data.path.append('/Users/cam/nltk_data')
+from nltk.tag import PerceptronTagger
+
+# Explicitly load the tagger
+tagger = PerceptronTagger()
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import wordnet
 import json
@@ -44,7 +50,7 @@ def save_to_json(data, filename):
 
 # Main function to run the analysis
 def main():
-    json_file = 'wordlist.json'  # Path to your JSON file
+    json_file = 'words.json'  # Path to your JSON file
     output_file = 'word_analysis.json'  # Output JSON file
     words = read_words_from_json(json_file)
     results = analyze_words(words)
