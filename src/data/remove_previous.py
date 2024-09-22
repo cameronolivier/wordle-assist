@@ -1,50 +1,45 @@
 import json
 
-# Function to remove previous answers from 'words' and add to 'previousAnswers'
-def filter_previous_answers(grouped_words, previous_answers):
-    filtered_words = []
-    previous = []
+# Function to remove words from first file that are found in second file
+def remove_common_words(file1_words, file2_words):
+    # Use a set for efficient lookup and filtering
+    words_to_remove = set(file2_words)
+    filtered_words = [word for word in file1_words if word not in words_to_remove]
+    return filtered_words
 
-    # Filter out words in previous_answers from grouped_words['words']
-    for word in grouped_words['words']:
-        if word in previous_answers:
-            previous.append(word)
-        else:
-            filtered_words.append(word)
+# Function to process both JSON files and write the result to a new file
+def process_files(file1, file2, output_file):
+    # Load the words from the first file
+    with open(file1, 'r') as f1:
+        data1 = json.load(f1)
+        words1 = data1.get('words', [])
 
-    # Update the grouped_words dictionary
-    grouped_words['words'] = filtered_words
-    grouped_words['previousAnswers'] = previous
+    # Load the words from the second file
+    with open(file2, 'r') as f2:
+        data2 = json.load(f2)
+        words2 = data2.get('words', [])
 
-    return grouped_words
+    # Remove common words
+    filtered_words = remove_common_words(words1, words2)
 
-# Function to read JSON files and process the data
-def process_grouped_words(grouped_file, previous_file, output_file):
-    # Read the grouped_words.json file
-    with open(grouped_file, 'r') as infile:
-        grouped_words = json.load(infile)
+    # Prepare the result as a new dictionary
+    result = {
+        "words": filtered_words
+    }
 
-    # Read the previous_answers.json file
-    with open(previous_file, 'r') as prevfile:
-        previous_answers_data = json.load(prevfile)
-        previous_answers = previous_answers_data.get('previousAnswers', [])
-
-    # Filter previous answers and update the words list
-    updated_grouped_words = filter_previous_answers(grouped_words, previous_answers)
-
-    # Write the updated data to the output file
+    # Write the result to the output file
     with open(output_file, 'w') as outfile:
-        json.dump(updated_grouped_words, outfile, indent=2)
+        json.dump(result, outfile, indent=2)
 
-    print(f"Updated grouped words saved to {output_file}")
+    print(f"Filtered words saved to {output_file}")
 
 # Main function to run the process
 def main():
-    grouped_file = 'grouped_words.json'  # Input file (grouped_words)
-    previous_file = 'previous_answers.json'  # Input file (previous_answers)
-    output_file = 'updated_grouped_words.json'  # Output file
+    file1 = 'categorised_words.json'  # Input file 1 with the words to filter
+    file2 = 'previous_answers.json'  # Input file 2 with the words to remove
+    output_file = 'words_no_previous.json'  # Output file with filtered results
 
-    process_grouped_words(grouped_file, previous_file, output_file)
+    process_files(file1, file2, output_file)
 
 if __name__ == "__main__":
     main()
